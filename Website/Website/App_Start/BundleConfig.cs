@@ -24,7 +24,7 @@ namespace Website
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/united-bootstrap.min.css",
                       "~/Content/site.css"));
         }
     }
