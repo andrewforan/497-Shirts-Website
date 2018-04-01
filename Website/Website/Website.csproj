@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -59,12 +62,22 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -187,19 +200,43 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\MappingProfile.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\ProductsController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Dtos\ProductDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201803282200270_InitialModel.cs" />
     <Compile Include="Migrations\201803282200270_InitialModel.Designer.cs">
       <DependentUpon>201803282200270_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804011940375_AddedProducts.cs" />
+    <Compile Include="Migrations\201804011940375_AddedProducts.Designer.cs">
+      <DependentUpon>201804011940375_AddedProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804011945316_UpdatedProducts.cs" />
+    <Compile Include="Migrations\201804011945316_UpdatedProducts.Designer.cs">
+      <DependentUpon>201804011945316_UpdatedProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804011952328_AddedImageToProducts.cs" />
+    <Compile Include="Migrations\201804011952328_AddedImageToProducts.Designer.cs">
+      <DependentUpon>201804011952328_AddedImageToProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804012003141_UpdatedProducts1.cs" />
+    <Compile Include="Migrations\201804012003141_UpdatedProducts1.Designer.cs">
+      <DependentUpon>201804012003141_UpdatedProducts1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804012003408_PopulateProducts.cs" />
+    <Compile Include="Migrations\201804012003408_PopulateProducts.Designer.cs">
+      <DependentUpon>201804012003408_PopulateProducts.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -209,6 +246,7 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ProductsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -291,6 +329,21 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201803282200270_InitialModel.resx">
       <DependentUpon>201803282200270_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804011940375_AddedProducts.resx">
+      <DependentUpon>201804011940375_AddedProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804011945316_UpdatedProducts.resx">
+      <DependentUpon>201804011945316_UpdatedProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804011952328_AddedImageToProducts.resx">
+      <DependentUpon>201804011952328_AddedImageToProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804012003141_UpdatedProducts1.resx">
+      <DependentUpon>201804012003141_UpdatedProducts1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804012003408_PopulateProducts.resx">
+      <DependentUpon>201804012003408_PopulateProducts.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

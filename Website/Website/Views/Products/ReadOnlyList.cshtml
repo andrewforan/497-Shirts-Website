@@ -1,9 +1,51 @@
-﻿@model Website.Models.Product
+﻿@model Website.ViewModels.ProductsViewModel
 
 @{
-    ViewBag.Title = "Random";
+    ViewBag.Title = "Product List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>PRODUCT LIST</h2>
+<br />
+
+@if (Model.Products.Count == 0)
+{
+    <text>No products found.</text>
+}
+else
+{
+        foreach (var product in Model.Products)
+        {
+            //<li>@product.Name</li>
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            @product.Name
+                            <!--<div class="btn-group pull-right navbar-right">
+                                <button class="btn btn-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></button>
+                               <ul class="dropdown-menu">
+                                    <li><a href="#"><i class="fa fa-wrench"></i> Settings</a></li>
+                                    <li><a href="#"><i class="fa fa-pencil"></i> Edit</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
+                                </ul>
+                            </div>-->
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="https://i.imgur.com/DjTOdfd.png">
+                    </div>
+                    <div class="panel-footer">
+                        <span class="btn btn-link">$@product.Price</span>
+                        <div class="pull-right">
+                            <a class="btn btn-success"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                        </div>
+                        <div class="clearfix">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+}
 

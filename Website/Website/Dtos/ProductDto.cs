@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace Website.Models
+namespace Website.Dtos
 {
-    public class Product
+    public class ProductDto
     {
         public int ID { get; set; }
 
@@ -31,6 +31,5 @@ namespace Website.Models
         public byte NumberInStock { get; set; }
 
         public string ImageLink { get; set; }
-
     }
 }
