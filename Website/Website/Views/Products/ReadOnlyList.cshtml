@@ -17,6 +17,7 @@ else
         foreach (var product in Model.Products)
         {
             //<li>@product.Name</li>
+
             <div class="col-md-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -37,10 +38,29 @@ else
                         <img src="https://i.imgur.com/DjTOdfd.png">
                     </div>
                     <div class="panel-footer">
-                        <span class="btn btn-link">$@product.Price</span>
-                        <div class="pull-right">
-                            <a class="btn btn-success"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                        <div class="text-center">
+                            <h5>Size:</h5>
+                            <label class="radio-inline">
+                                <input type="radio" name="optradio">Small
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="optradio">Medium
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="optradio">Large
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="optradio">Extra Large
+                            </label>
+                            <br /><br />
                         </div>
+                        <div class="pull-right">
+                            <a href="#" class="btn btn-success btn-md"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</a>
+
+                        </div>
+
+                        <span class="btn btn-link">$@product.Price</span>
+
                         <div class="clearfix">
                         </div>
                     </div>

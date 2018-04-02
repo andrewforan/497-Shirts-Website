@@ -17,6 +17,7 @@ namespace Website.Controllers
             return View(product);
         }*/
 
+        [AllowAnonymous]
         public ActionResult ReadOnlyList()
         {
             var products = new List<Product>
