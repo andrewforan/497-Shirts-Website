@@ -8,64 +8,85 @@
 <h2>PRODUCT LIST</h2>
 <br />
 
+@{int buttonID = 0;}
+
 @if (Model.Products.Count == 0)
 {
     <text>No products found.</text>
 }
 else
 {
-        foreach (var product in Model.Products)
-        {
-            //<li>@product.Name</li>
-
-            <div class="col-md-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            @product.Name
-                            <!--<div class="btn-group pull-right navbar-right">
-                                <button class="btn btn-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></button>
-                               <ul class="dropdown-menu">
-                                    <li><a href="#"><i class="fa fa-wrench"></i> Settings</a></li>
-                                    <li><a href="#"><i class="fa fa-pencil"></i> Edit</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
-                                </ul>
-                            </div>-->
-                        </h3>
+    foreach (var product in Model.Products)
+    {
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        @product.Name
+                        <!--<div class="btn-group pull-right navbar-right">
+                            <button class="btn btn-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></button>
+                           <ul class="dropdown-menu">
+                                <li><a href="#"><i class="fa fa-wrench"></i> Settings</a></li>
+                                <li><a href="#"><i class="fa fa-pencil"></i> Edit</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
+                            </ul>
+                        </div>-->
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <img src=@product.ImageLink>
+                </div>
+                <div class="panel-footer">
+                    <div class="text-center">
+                        <h5>Size:</h5>
+                        <label class="radio-inline">
+                            <input type="radio" name="small">Small
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="medium">Medium
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="large">Large
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="xlarge">Extra Large
+                        </label>
+                        <br /><br />
                     </div>
-                    <div class="panel-body">
-                        <img src="https://i.imgur.com/DjTOdfd.png">
+                    <div class="pull-right">
+                        <a href="#" id=@buttonID class="btn btn-success btn-md"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</a>
+                        <script type="text/javascript">
+                            document.getElementById(@buttonID).onclick = function () {
+
+                                //var size = null;
+                                //if (document.getElementById("small").checked = true) {
+                                //    size = "Small";
+                                //}
+                                //else if (document.getElementById("medium").checked = true) {
+                                //    size = "Medium"
+                                //}
+                                //else if (document.getElementById("large").checked = true) {
+                                //    size = "Large"
+                                //}
+                                //else if (document.getElementById("xlarge").checked = true) {
+                                //    size = "Extra Large"
+                                //}
+
+                                alert("Added!");
+                            }
+                        </script>
+
                     </div>
-                    <div class="panel-footer">
-                        <div class="text-center">
-                            <h5>Size:</h5>
-                            <label class="radio-inline">
-                                <input type="radio" name="optradio">Small
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="optradio">Medium
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="optradio">Large
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="optradio">Extra Large
-                            </label>
-                            <br /><br />
-                        </div>
-                        <div class="pull-right">
-                            <a href="#" class="btn btn-success btn-md"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</a>
 
-                        </div>
+                    <span class="btn btn-link">$@product.Price</span>
 
-                        <span class="btn btn-link">$@product.Price</span>
-
-                        <div class="clearfix">
-                        </div>
+                    <div class="clearfix">
                     </div>
                 </div>
             </div>
-        }
+        </div>
+        buttonID++;
+    }
 }
 
