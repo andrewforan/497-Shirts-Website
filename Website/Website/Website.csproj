@@ -242,12 +242,37 @@
     <Compile Include="Migrations\201804050120598_SeedUsers.Designer.cs">
       <DependentUpon>201804050120598_SeedUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804050158305_ProductModelEdits.cs" />
+    <Compile Include="Migrations\201804050158305_ProductModelEdits.Designer.cs">
+      <DependentUpon>201804050158305_ProductModelEdits.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804050206596_AddedProductDetail.cs" />
+    <Compile Include="Migrations\201804050206596_AddedProductDetail.Designer.cs">
+      <DependentUpon>201804050206596_AddedProductDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804050207598_SeedProductDetail.cs" />
+    <Compile Include="Migrations\201804050207598_SeedProductDetail.Designer.cs">
+      <DependentUpon>201804050207598_SeedProductDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804050211310_MoreProductDetails.cs" />
+    <Compile Include="Migrations\201804050211310_MoreProductDetails.Designer.cs">
+      <DependentUpon>201804050211310_MoreProductDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804050234079_AddedCart.cs" />
+    <Compile Include="Migrations\201804050234079_AddedCart.Designer.cs">
+      <DependentUpon>201804050234079_AddedCart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804050240124_SeedCart.cs" />
+    <Compile Include="Migrations\201804050240124_SeedCart.Designer.cs">
+      <DependentUpon>201804050240124_SeedCart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductDetail.cs" />
     <Compile Include="Models\RoleName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -353,6 +378,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804050120598_SeedUsers.resx">
       <DependentUpon>201804050120598_SeedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804050158305_ProductModelEdits.resx">
+      <DependentUpon>201804050158305_ProductModelEdits.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804050206596_AddedProductDetail.resx">
+      <DependentUpon>201804050206596_AddedProductDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804050207598_SeedProductDetail.resx">
+      <DependentUpon>201804050207598_SeedProductDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804050211310_MoreProductDetails.resx">
+      <DependentUpon>201804050211310_MoreProductDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804050234079_AddedCart.resx">
+      <DependentUpon>201804050234079_AddedCart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804050240124_SeedCart.resx">
+      <DependentUpon>201804050240124_SeedCart.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

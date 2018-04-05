@@ -8,6 +8,7 @@ namespace Website.Models
     public class Cart
     {
         public int ID { get; set; }
-        public string Name { get; set; }
+        public string User { get; set; }
+        public string Contents { get; set; }
     }
 }
