@@ -266,6 +266,14 @@
     <Compile Include="Migrations\201804050240124_SeedCart.Designer.cs">
       <DependentUpon>201804050240124_SeedCart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804090253367_CartModelEdit.cs" />
+    <Compile Include="Migrations\201804090253367_CartModelEdit.Designer.cs">
+      <DependentUpon>201804090253367_CartModelEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804090255445_CartModelEdit1.cs" />
+    <Compile Include="Migrations\201804090255445_CartModelEdit1.Designer.cs">
+      <DependentUpon>201804090255445_CartModelEdit1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -338,7 +346,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Products\ReadOnlyList.cshtml" />
-    <Content Include="Views\Cart\ReadOnlyList.cshtml" />
+    <Content Include="Views\Cart\List.cshtml" />
     <Content Include="Views\Products\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -396,6 +404,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804050240124_SeedCart.resx">
       <DependentUpon>201804050240124_SeedCart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804090253367_CartModelEdit.resx">
+      <DependentUpon>201804090253367_CartModelEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804090255445_CartModelEdit1.resx">
+      <DependentUpon>201804090255445_CartModelEdit1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,26 @@
+﻿@model Website.ViewModels.ProductsViewModel
+
+@{
+    /**/
+
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CART</h2>
+
+<br />
+
+@if (Model == null)
+{
+    <div class="alert alert-warning">
+        <strong>Your cart is currently empty.</strong>
+    </div>
+}
+else
+{
+    foreach (var product in Model.Products)
+    {
+        <text>@product.ID TEST @product.Name</text>
+    }
+}

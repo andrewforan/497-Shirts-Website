@@ -40,5 +40,21 @@ namespace Website.Controllers
 
             return View("ReadOnlyList", viewModel);
         }
+
+
+        [HttpPost]
+        public ActionResult AddProduct()
+        {
+            Cart cart = new Cart();
+            cart = _context.Cart.First(x => x.User == System.Web.HttpContext.Current.User.Identity.Name);
+            cart.Contents = cart.Contents + "TEST";
+
+            _context.Cart.Attach(cart);
+            var entry = _context.Entry(cart);
+            entry.Property(e => e.Contents).IsModified = true;
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Products");
+        }
     }
 }
