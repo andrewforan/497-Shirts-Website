@@ -10,5 +10,6 @@ namespace Website.Models
         public int ID { get; set; }
         public string User { get; set; }
         public string Contents { get; set; }
+        public decimal Total { get; set; }
     }
 }

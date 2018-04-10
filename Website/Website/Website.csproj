@@ -274,13 +274,68 @@
     <Compile Include="Migrations\201804090255445_CartModelEdit1.Designer.cs">
       <DependentUpon>201804090255445_CartModelEdit1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804100144341_CartModelEdit2.cs" />
+    <Compile Include="Migrations\201804100144341_CartModelEdit2.Designer.cs">
+      <DependentUpon>201804100144341_CartModelEdit2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804100211110_ProductModelUpdate.cs" />
+    <Compile Include="Migrations\201804100211110_ProductModelUpdate.Designer.cs">
+      <DependentUpon>201804100211110_ProductModelUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804100212493_UpdateProductModel.cs" />
+    <Compile Include="Migrations\201804100212493_UpdateProductModel.Designer.cs">
+      <DependentUpon>201804100212493_UpdateProductModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804100214063_UpdateProductModel1.cs" />
+    <Compile Include="Migrations\201804100214063_UpdateProductModel1.Designer.cs">
+      <DependentUpon>201804100214063_UpdateProductModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804100215340_UpdateProductModel2.cs" />
+    <Compile Include="Migrations\201804100215340_UpdateProductModel2.Designer.cs">
+      <DependentUpon>201804100215340_UpdateProductModel2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804100218261_ProductModelUpdate1.cs" />
+    <Compile Include="Migrations\201804100218261_ProductModelUpdate1.Designer.cs">
+      <DependentUpon>201804100218261_ProductModelUpdate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804100220245_UpdateProductModel3.cs" />
+    <Compile Include="Migrations\201804100220245_UpdateProductModel3.Designer.cs">
+      <DependentUpon>201804100220245_UpdateProductModel3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804100222008_ProductModelUpdate2.cs" />
+    <Compile Include="Migrations\201804100222008_ProductModelUpdate2.Designer.cs">
+      <DependentUpon>201804100222008_ProductModelUpdate2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804100222422_ProductModelUpdate3.cs" />
+    <Compile Include="Migrations\201804100222422_ProductModelUpdate3.Designer.cs">
+      <DependentUpon>201804100222422_ProductModelUpdate3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804100223508_AddProductsToDB.cs" />
+    <Compile Include="Migrations\201804100223508_AddProductsToDB.Designer.cs">
+      <DependentUpon>201804100223508_AddProductsToDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804100229227_AddProducts.cs" />
+    <Compile Include="Migrations\201804100229227_AddProducts.Designer.cs">
+      <DependentUpon>201804100229227_AddProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804100231348_ProductModelUpdate4.cs" />
+    <Compile Include="Migrations\201804100231348_ProductModelUpdate4.Designer.cs">
+      <DependentUpon>201804100231348_ProductModelUpdate4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804100232543_SeedProducts.cs" />
+    <Compile Include="Migrations\201804100232543_SeedProducts.Designer.cs">
+      <DependentUpon>201804100232543_SeedProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804100236214_AddProducts1.cs" />
+    <Compile Include="Migrations\201804100236214_AddProducts1.Designer.cs">
+      <DependentUpon>201804100236214_AddProducts1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\ProductDetail.cs" />
     <Compile Include="Models\RoleName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -348,6 +403,7 @@
     <Content Include="Views\Products\ReadOnlyList.cshtml" />
     <Content Include="Views\Cart\List.cshtml" />
     <Content Include="Views\Products\List.cshtml" />
+    <Content Include="Views\Cart\Checkout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -410,6 +466,48 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804090255445_CartModelEdit1.resx">
       <DependentUpon>201804090255445_CartModelEdit1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804100144341_CartModelEdit2.resx">
+      <DependentUpon>201804100144341_CartModelEdit2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804100211110_ProductModelUpdate.resx">
+      <DependentUpon>201804100211110_ProductModelUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804100212493_UpdateProductModel.resx">
+      <DependentUpon>201804100212493_UpdateProductModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804100214063_UpdateProductModel1.resx">
+      <DependentUpon>201804100214063_UpdateProductModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804100215340_UpdateProductModel2.resx">
+      <DependentUpon>201804100215340_UpdateProductModel2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804100218261_ProductModelUpdate1.resx">
+      <DependentUpon>201804100218261_ProductModelUpdate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804100220245_UpdateProductModel3.resx">
+      <DependentUpon>201804100220245_UpdateProductModel3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804100222008_ProductModelUpdate2.resx">
+      <DependentUpon>201804100222008_ProductModelUpdate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804100222422_ProductModelUpdate3.resx">
+      <DependentUpon>201804100222422_ProductModelUpdate3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804100223508_AddProductsToDB.resx">
+      <DependentUpon>201804100223508_AddProductsToDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804100229227_AddProducts.resx">
+      <DependentUpon>201804100229227_AddProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804100231348_ProductModelUpdate4.resx">
+      <DependentUpon>201804100231348_ProductModelUpdate4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804100232543_SeedProducts.resx">
+      <DependentUpon>201804100232543_SeedProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804100236214_AddProducts1.resx">
+      <DependentUpon>201804100236214_AddProducts1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

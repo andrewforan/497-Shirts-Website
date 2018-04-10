@@ -18,5 +18,18 @@ namespace Website.Models
 
         public string ImageLink { get; set; }
 
+        [StringLength(255)]
+        public string Size { get; set; }
+
+        [Display(Name = "Category")]
+        [Required]
+        public byte CategoryId { get; set; }
+
+        [Display(Name = "Number in Stock")]
+        public byte NumberInStock { get; set; }
+
+        public bool Viewable { get; set; }
+
+        public int ParentID { get; set; }
     }
 }
