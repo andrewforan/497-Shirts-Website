@@ -207,6 +207,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\ProductsController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -330,9 +331,14 @@
     <Compile Include="Migrations\201804100236214_AddProducts1.Designer.cs">
       <DependentUpon>201804100236214_AddProducts1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804101506544_AddCustomerModel.cs" />
+    <Compile Include="Migrations\201804101506544_AddCustomerModel.Designer.cs">
+      <DependentUpon>201804101506544_AddCustomerModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Product.cs" />
@@ -403,7 +409,7 @@
     <Content Include="Views\Products\ReadOnlyList.cshtml" />
     <Content Include="Views\Cart\List.cshtml" />
     <Content Include="Views\Products\List.cshtml" />
-    <Content Include="Views\Cart\Checkout.cshtml" />
+    <Content Include="Views\Checkout\CustomerInfoForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -508,6 +514,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804100236214_AddProducts1.resx">
       <DependentUpon>201804100236214_AddProducts1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804101506544_AddCustomerModel.resx">
+      <DependentUpon>201804101506544_AddCustomerModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

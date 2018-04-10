@@ -22,6 +22,7 @@ namespace Website.Models
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<Cart> Cart { get; set; }
+        public DbSet<Customer> Customer { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
