@@ -331,49 +331,17 @@
     <Compile Include="Migrations\201804100236214_AddProducts1.Designer.cs">
       <DependentUpon>201804100236214_AddProducts1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804101506544_AddCustomerModel.cs" />
-    <Compile Include="Migrations\201804101506544_AddCustomerModel.Designer.cs">
-      <DependentUpon>201804101506544_AddCustomerModel.cs</DependentUpon>
+    <Compile Include="Migrations\201804111725103_AddOrderModel.cs" />
+    <Compile Include="Migrations\201804111725103_AddOrderModel.Designer.cs">
+      <DependentUpon>201804111725103_AddOrderModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804110150348_UpdateCustomerModel.cs" />
-    <Compile Include="Migrations\201804110150348_UpdateCustomerModel.Designer.cs">
-      <DependentUpon>201804110150348_UpdateCustomerModel.cs</DependentUpon>
+    <Compile Include="Migrations\201804111740211_UpdateProductModel4.cs" />
+    <Compile Include="Migrations\201804111740211_UpdateProductModel4.Designer.cs">
+      <DependentUpon>201804111740211_UpdateProductModel4.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804110151082_UpdateCustomerModel1.cs" />
-    <Compile Include="Migrations\201804110151082_UpdateCustomerModel1.Designer.cs">
-      <DependentUpon>201804110151082_UpdateCustomerModel1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804110240304_UpdateCustomerModel2.cs" />
-    <Compile Include="Migrations\201804110240304_UpdateCustomerModel2.Designer.cs">
-      <DependentUpon>201804110240304_UpdateCustomerModel2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804110248242_UpdateCustomerModel3.cs" />
-    <Compile Include="Migrations\201804110248242_UpdateCustomerModel3.Designer.cs">
-      <DependentUpon>201804110248242_UpdateCustomerModel3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804110258403_CustomerModelUpdate.cs" />
-    <Compile Include="Migrations\201804110258403_CustomerModelUpdate.Designer.cs">
-      <DependentUpon>201804110258403_CustomerModelUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804110259107_UpdateCustomerModel4.cs" />
-    <Compile Include="Migrations\201804110259107_UpdateCustomerModel4.Designer.cs">
-      <DependentUpon>201804110259107_UpdateCustomerModel4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804110325217_UpdateCustomerModel5.cs" />
-    <Compile Include="Migrations\201804110325217_UpdateCustomerModel5.Designer.cs">
-      <DependentUpon>201804110325217_UpdateCustomerModel5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804110325478_UpdateCustomerModel6.cs" />
-    <Compile Include="Migrations\201804110325478_UpdateCustomerModel6.Designer.cs">
-      <DependentUpon>201804110325478_UpdateCustomerModel6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804110403341_SomethingBroke.cs" />
-    <Compile Include="Migrations\201804110403341_SomethingBroke.Designer.cs">
-      <DependentUpon>201804110403341_SomethingBroke.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804110429502_UpdateCustomerModel7.cs" />
-    <Compile Include="Migrations\201804110429502_UpdateCustomerModel7.Designer.cs">
-      <DependentUpon>201804110429502_UpdateCustomerModel7.cs</DependentUpon>
+    <Compile Include="Migrations\201804111747543_UpdateOrderModel.cs" />
+    <Compile Include="Migrations\201804111747543_UpdateOrderModel.Designer.cs">
+      <DependentUpon>201804111747543_UpdateOrderModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -381,6 +349,7 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\RoleName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -556,38 +525,14 @@
     <EmbeddedResource Include="Migrations\201804100236214_AddProducts1.resx">
       <DependentUpon>201804100236214_AddProducts1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804101506544_AddCustomerModel.resx">
-      <DependentUpon>201804101506544_AddCustomerModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804111725103_AddOrderModel.resx">
+      <DependentUpon>201804111725103_AddOrderModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804110150348_UpdateCustomerModel.resx">
-      <DependentUpon>201804110150348_UpdateCustomerModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804111740211_UpdateProductModel4.resx">
+      <DependentUpon>201804111740211_UpdateProductModel4.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804110151082_UpdateCustomerModel1.resx">
-      <DependentUpon>201804110151082_UpdateCustomerModel1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804110240304_UpdateCustomerModel2.resx">
-      <DependentUpon>201804110240304_UpdateCustomerModel2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804110248242_UpdateCustomerModel3.resx">
-      <DependentUpon>201804110248242_UpdateCustomerModel3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804110258403_CustomerModelUpdate.resx">
-      <DependentUpon>201804110258403_CustomerModelUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804110259107_UpdateCustomerModel4.resx">
-      <DependentUpon>201804110259107_UpdateCustomerModel4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804110325217_UpdateCustomerModel5.resx">
-      <DependentUpon>201804110325217_UpdateCustomerModel5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804110325478_UpdateCustomerModel6.resx">
-      <DependentUpon>201804110325478_UpdateCustomerModel6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804110403341_SomethingBroke.resx">
-      <DependentUpon>201804110403341_SomethingBroke.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804110429502_UpdateCustomerModel7.resx">
-      <DependentUpon>201804110429502_UpdateCustomerModel7.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804111747543_UpdateOrderModel.resx">
+      <DependentUpon>201804111747543_UpdateOrderModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

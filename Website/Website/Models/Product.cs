@@ -26,7 +26,7 @@ namespace Website.Models
         public byte CategoryId { get; set; }
 
         [Display(Name = "Number in Stock")]
-        public byte NumberInStock { get; set; }
+        public int NumberInStock { get; set; }
 
         public bool Viewable { get; set; }
 
