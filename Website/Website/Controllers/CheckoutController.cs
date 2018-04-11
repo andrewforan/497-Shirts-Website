@@ -9,6 +9,23 @@ namespace Website.Controllers
 {
     public class CheckoutController : Controller
     {
+        private ApplicationDbContext _context;
+
+        public CheckoutController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
+        public ViewResult OrderPlaced()
+        {
+            return View("OrderPlaced");
+        }
+
         // GET: Checkout
         public ViewResult Index()
         {
@@ -16,36 +33,47 @@ namespace Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult SubmitInfo(Customer customer)
+        public ActionResult SubmitInfo(Customer currentUser)
         {
             if (!ModelState.IsValid)
             {
                 var view = new Customer
                 {
-                    Name = customer.Name,
-                    Email = customer.Email,
-                    PhoneNumber = customer.PhoneNumber
+                    PhoneNumber = currentUser.PhoneNumber,
+                    BillName = currentUser.BillName,
+                    BillAddress = currentUser.BillAddress,
+                    BillCity = currentUser.BillCity,
+                    BillState = currentUser.BillState,
+                    BillZip = currentUser.BillZip,
+                    ShipName = currentUser.ShipName,
+                    ShipAddress = currentUser.ShipAddress,
+                    ShipCity = currentUser.ShipCity,
+                    ShipState = currentUser.ShipState,
+                    ShipZip = currentUser.ShipZip,
+                    CardNumber = currentUser.CardNumber,
+                    CardName = currentUser.CardName,
+                    CardExpirartion = currentUser.CardExpirartion,
+                    CardCVV = currentUser.CardCVV
                 };
 
-                return View("Index", view);
+                return View("CustomerInfoForm", view);
             }
             else
             {
-                //if (contact.FileUpload.InputStream.Length > 0)
-                //{
-                //    byte[] uploadedFileBytes = new byte[contact.FileUpload.InputStream.Length];
-                //    contact.FileUpload.InputStream.Read(uploadedFileBytes, 0, uploadedFileBytes.Length);
-                //    contact.FileUploadBytes = uploadedFileBytes;
-                //}
+                currentUser.Email = System.Web.HttpContext.Current.User.Identity.Name;
+                _context.Customer.Add(currentUser);
 
-                //_context.Contacts.Add(contact);
-                //TempData["status"] = "Message Successfully Sent";
+                Cart cart = new Cart();
+                cart = _context.Cart.First(x => x.User == System.Web.HttpContext.Current.User.Identity.Name);
+                cart.Contents = null;
+                _context.Cart.Attach(cart);
+                var entry = _context.Entry(cart);
+                entry.Property(e => e.Contents).IsModified = true;
+
+                _context.SaveChanges();
             }
 
-
-
-
-            return View("CustomerInfoForm");
+            return View("OrderPlaced");
         }
     }
 }

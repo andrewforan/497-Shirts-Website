@@ -51,9 +51,10 @@ else
 
                             @using (Html.BeginForm("AddProduct", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
+                                @Html.HiddenFor(m => m.Products)
                                 <div class="row">
                                     <div class="form-group col-lg-12">
-                                        <input type="hidden" value="contact" name="save">
+                                        <input type="hidden" value="item" name="save">
                                         <button class="btn btn-success btn-md" type="submit"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
                                     </div>
                                 </div>

@@ -5,44 +5,368 @@
     ViewBag.Title = "CustomerInfoForm";
 }
 
-<h2>CustomerInfoForm</h2>
+<style>
+    body {
+        margin-top: 20px;
+    }
+</style>
+
+<br />
 
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-8">
-            <h3>Let's Get In Touch!</h3>
-            <p>Lid est laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats vitaes nemo minima rerums unsers sadips amets. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+@using (Html.BeginForm("SubmitInfo", "Checkout", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <h5 style="color:white"><span class="glyphicon glyphicon-info-sign"></span> Billing Information</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            @using (Html.BeginForm("SubmitInfo", "Checkout", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true, "Please fix the following errors.")
-                <div class="row">
-                    <div class="form-group col-lg-4">
-                        @Html.LabelFor(m => m.Name)
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Name)
-                    </div>
-                    <div class="form-group col-lg-4">
-                        @Html.LabelFor(m => m.Email)
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email)
-                    </div>
-                    <div class="form-group col-lg-4">
-                        @Html.LabelFor(m => m.PhoneNumber)
-                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.PhoneNumber)
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="form-group col-lg-12">
-                        <input type="hidden" value="contact" name="save">
-                        <button class="btn btn-primary" type="submit">Submit</button>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h3>Almost Done!</h3>
+                                <p>We just need some more information from you, please fill out the forms below.</p>
+                                <br />
+
+                                <div class="row">
+                                    <div class="form-group col-lg-4">
+                                        @Html.LabelFor(m => m.BillName)
+                                        @Html.TextBoxFor(m => m.BillName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.BillName, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        @Html.LabelFor(m => m.PhoneNumber)
+                                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="form-group col-lg-5">
+                                        @Html.LabelFor(m => m.BillAddress)
+                                        @Html.TextBoxFor(m => m.BillAddress, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.BillAddress, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="form-group col-lg-3">
+                                        @Html.LabelFor(m => m.BillCity)
+                                        @Html.TextBoxFor(m => m.BillCity, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.BillCity, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="form-group col-lg-1">
+                                        @Html.LabelFor(m => m.BillState)
+                                        @Html.TextBoxFor(m => m.BillState, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.BillState, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="form-group col-lg-2">
+                                        @Html.LabelFor(m => m.BillZip)
+                                        @Html.TextBoxFor(m => m.BillZip, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.BillZip, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            }
+            </div>
         </div>
     </div>
-</div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <h5 style="color:white"><span class="glyphicon glyphicon-info-sign"></span> Shipping Information</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8">
+
+                                <div class="row">
+                                    <div class="form-group col-lg-12">
+                                        @Html.LabelFor(m => m.ShipName)
+                                        @Html.TextBoxFor(m => m.ShipName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.ShipName, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="form-group col-lg-5">
+                                        @Html.LabelFor(m => m.ShipAddress)
+                                        @Html.TextBoxFor(m => m.ShipAddress, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.ShipAddress, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="form-group col-lg-3">
+                                        @Html.LabelFor(m => m.ShipCity)
+                                        @Html.TextBoxFor(m => m.ShipCity, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.ShipCity, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="form-group col-lg-1">
+                                        @Html.LabelFor(m => m.ShipState)
+                                        @Html.TextBoxFor(m => m.ShipState, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.ShipState, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="form-group col-lg-2">
+                                        @Html.LabelFor(m => m.ShipZip)
+                                        @Html.TextBoxFor(m => m.ShipZip, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.ShipZip, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <h5 style="color:white"><span class="glyphicon glyphicon-usd"></span> Payment Information</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8">
+
+                                <div class="row">
+                                    <div class="form-group col-lg-3">
+                                        @Html.LabelFor(m => m.CardName)
+                                        @Html.TextBoxFor(m => m.CardName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.CardName, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="form-group col-lg-5">
+                                        @Html.LabelFor(m => m.CardNumber)
+                                        @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.CardNumber, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="form-group col-lg-2">
+                                        @Html.LabelFor(m => m.CardExpirartion)
+                                        @Html.TextBoxFor(m => m.CardExpirartion, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.CardExpirartion, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="form-group col-lg-2">
+                                        @Html.LabelFor(m => m.CardCVV)
+                                        @Html.TextBoxFor(m => m.CardCVV, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.CardCVV, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-12">
+                    <input type="hidden" value="customer" name="save">
+                    <button class="btn btn-success" type="submit">Complete Purchase</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <h5 style="color:white"><span class="glyphicon glyphicon-info-sign"></span> Billing Information</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h3>Almost Done!</h3>
+                                <p>We just need some more information from you, please fill out the forms below.</p>
+                                <br />
+
+                                @using (Html.BeginForm("SubmitInfo", "Checkout", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true, "Please fix the following errors.")
+                                    <div class="row">
+                                        <div class="form-group col-lg-4">
+                                            @Html.LabelFor(m => m.BillName)
+                                            @Html.TextBoxFor(m => m.BillName, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.BillName)
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            @Html.LabelFor(m => m.Email)
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.Email)
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            @Html.LabelFor(m => m.PhoneNumber)
+                                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.PhoneNumber)
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="form-group col-lg-12">
+                                            <input type="hidden" value="contact" name="save">
+                                            <button class="btn btn-primary" type="submit">Submit</button>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <h5 style="color:white"><span class="glyphicon glyphicon-info-sign"></span> Shipping Information</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8">
+
+                                @using (Html.BeginForm("SubmitInfo", "Checkout", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true, "Please fix the following errors.")
+                                    <div class="row">
+                                        <div class="form-group col-lg-4">
+                                            @Html.LabelFor(m => m.ShipName)
+                                            @Html.TextBoxFor(m => m.ShipName, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.ShipName)
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            @Html.LabelFor(m => m.Email)
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.Email)
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            @Html.LabelFor(m => m.PhoneNumber)
+                                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.PhoneNumber)
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="form-group col-lg-12">
+                                            <input type="hidden" value="contact" name="save">
+                                            <button class="btn btn-primary" type="submit">Submit</button>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <h5 style="color:white"><span class="glyphicon glyphicon-usd"></span> Payment Information</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8">
+
+                                @using (Html.BeginForm("SubmitInfo", "Checkout", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true, "Please fix the following errors.")
+                                    <div class="row">
+                                        <div class="form-group col-lg-4">
+                                            @Html.LabelFor(m => m.CardName)
+                                            @Html.TextBoxFor(m => m.CardName, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.CardName)
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            @Html.LabelFor(m => m.Email)
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.Email)
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            @Html.LabelFor(m => m.PhoneNumber)
+                                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.PhoneNumber)
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="form-group col-lg-12">
+                                            <input type="hidden" value="contact" name="save">
+                                            <button class="btn btn-primary" type="submit">Submit</button>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
