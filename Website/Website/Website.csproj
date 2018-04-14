@@ -343,6 +343,26 @@
     <Compile Include="Migrations\201804111747543_UpdateOrderModel.Designer.cs">
       <DependentUpon>201804111747543_UpdateOrderModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804140229474_UpdateProductModel5.cs" />
+    <Compile Include="Migrations\201804140229474_UpdateProductModel5.Designer.cs">
+      <DependentUpon>201804140229474_UpdateProductModel5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804140401405_UpdateCartModel.cs" />
+    <Compile Include="Migrations\201804140401405_UpdateCartModel.Designer.cs">
+      <DependentUpon>201804140401405_UpdateCartModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804141856174_UpdateProductModel6.cs" />
+    <Compile Include="Migrations\201804141856174_UpdateProductModel6.Designer.cs">
+      <DependentUpon>201804141856174_UpdateProductModel6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804142120093_UpdateProductModel7.cs" />
+    <Compile Include="Migrations\201804142120093_UpdateProductModel7.Designer.cs">
+      <DependentUpon>201804142120093_UpdateProductModel7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804142121135_SeedBaseProducts.cs" />
+    <Compile Include="Migrations\201804142121135_SeedBaseProducts.Designer.cs">
+      <DependentUpon>201804142121135_SeedBaseProducts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -420,6 +440,8 @@
     <Content Include="Views\Products\List.cshtml" />
     <Content Include="Views\Checkout\CustomerInfoForm.cshtml" />
     <Content Include="Views\Checkout\OrderPlaced.cshtml" />
+    <Content Include="Views\Products\EditProduct.cshtml" />
+    <Content Include="Views\Products\NewProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -533,6 +555,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804111747543_UpdateOrderModel.resx">
       <DependentUpon>201804111747543_UpdateOrderModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804140229474_UpdateProductModel5.resx">
+      <DependentUpon>201804140229474_UpdateProductModel5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804140401405_UpdateCartModel.resx">
+      <DependentUpon>201804140401405_UpdateCartModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804141856174_UpdateProductModel6.resx">
+      <DependentUpon>201804141856174_UpdateProductModel6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804142120093_UpdateProductModel7.resx">
+      <DependentUpon>201804142120093_UpdateProductModel7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804142121135_SeedBaseProducts.resx">
+      <DependentUpon>201804142121135_SeedBaseProducts.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

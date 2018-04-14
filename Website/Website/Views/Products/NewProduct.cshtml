@@ -1,0 +1,90 @@
+﻿@model Website.Models.Product
+@{
+    ViewBag.Title = "NewProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        margin-top: 20px;
+    }
+
+    .container1 {
+        width: 312px;
+        margin: 0 auto;
+    }
+</style>
+
+<br />
+
+@using (Html.BeginForm("AddNewProduct", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container1">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h5 style="color:white"><span class="glyphicon glyphicon-cog"></span> New Product Information</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <br />
+
+                                <div class="row">
+                                    <div class="form-group col-lg-12">
+                                        @Html.LabelFor(m => m.Name)
+                                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.Name, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="form-group col-lg-12">
+                                        @Html.LabelFor(m => m.Price)
+                                        @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.Price, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="form-group col-lg-12">
+                                        @Html.LabelFor(m => m.Size)
+                                        @Html.TextBoxFor(m => m.Size, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.Size, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="form-group col-lg-12">
+                                        @Html.LabelFor(m => m.ImageLink)
+                                        @Html.TextBoxFor(m => m.ImageLink, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.ImageLink, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="form-group col-lg-12">
+                                        @Html.LabelFor(m => m.CategoryId)
+                                        @Html.TextBoxFor(m => m.CategoryId, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.CategoryId, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="form-group col-lg-12">
+                                        @Html.LabelFor(m => m.NumberInStock)
+                                        @Html.TextBoxFor(m => m.NumberInStock, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.NumberInStock, "", new { @style = "color:red" })
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-lg-2">
+                            <input type="hidden" value="order" name="save">
+                            <button id="update" class="btn btn-primary" type="submit">Save</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

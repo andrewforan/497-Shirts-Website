@@ -31,47 +31,48 @@ else
                         <img src=@product.ImageLink>
                     </div>
                     <div class="panel-footer">
-                        <div class="text-center">
-                            <h5>Size:</h5>
-                            <label class="radio-inline">
-                                <input type="radio" name="small">Small
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="medium">Medium
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="large">Large
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="xlarge">Extra Large
-                            </label>
-                            <br /><br />
-                        </div>
-                        <div class="pull-right">
 
-                            @using (Html.BeginForm("AddProduct", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                            {
-                                @Html.HiddenFor(m => m.Products)
+                        @using (Html.BeginForm("AddProduct", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            Model.ID = product.ID;
+                            @Html.HiddenFor(m => m.ID);
+
+                            <div class="text-center">
+                                <div class="btn btn-link">$@product.Price</div><br />
+                                @Html.DropDownListFor(
+                                model => model.Size, 
+                                    new SelectList(
+                                        new List<Object>{ 
+                                            new { value = "Small" , text = "Small"  },
+                                            new { value = "Medium" , text = "Medium" },
+                                            new { value = "Large" , text = "Large" },
+                                            new { value = "Extra Large" , text = "Extra Large"}
+                                            },
+                                        "value",
+                                        "text",
+                                        Model.Size
+                                       )
+                                    )<br /><br />
+                            </div>
+                            <div class="pull-right">
+
+                                <div class="col-xs-4">
+                                    @Html.TextBoxFor(m => m.quantity, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.quantity, "", new { @style = "color:red" })
+                                </div>
+
                                 <div class="row">
-                                    <div class="form-group col-lg-12">
-                                        <input type="hidden" value="item" name="save">
-                                        <button class="btn btn-success btn-md" type="submit"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
+                                    <div class="form-group col-lg-6">
+                                        <input type="hidden" value="id" name="save">
+                                        <button id="@buttonID" class="btn btn-success btn-md" type="submit"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
                                     </div>
                                 </div>
-                            }
+                            </div>
 
-                            @*<a href="#" id=@buttonID class="btn btn-success btn-md"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</a>*@
-                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
-                            <script type="text/javascript">
-                                                                                                                    //script here
-                            </script>
+                            <div class="clearfix">
+                            </div>
+                         }
 
-                        </div>
-
-                        <span class="btn btn-link">$@product.Price</span>
-
-                        <div class="clearfix">
-                        </div>
                     </div>
                 </div>
             </div>

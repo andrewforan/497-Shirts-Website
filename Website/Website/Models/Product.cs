@@ -14,10 +14,13 @@ namespace Website.Models
         [StringLength(255)]
         public string Name { get; set; }
 
+        [Required]
         public decimal Price { get; set; }
 
+        [Required]
         public string ImageLink { get; set; }
 
+        [Required]
         [StringLength(255)]
         public string Size { get; set; }
 
@@ -25,6 +28,7 @@ namespace Website.Models
         [Required]
         public byte CategoryId { get; set; }
 
+        [Required]
         [Display(Name = "Number in Stock")]
         public int NumberInStock { get; set; }
 
