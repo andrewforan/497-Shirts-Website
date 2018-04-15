@@ -20,7 +20,6 @@ namespace Website.Models
         [Required]
         public string ImageLink { get; set; }
 
-        [Required]
         [StringLength(255)]
         public string Size { get; set; }
 

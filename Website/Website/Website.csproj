@@ -363,6 +363,10 @@
     <Compile Include="Migrations\201804142121135_SeedBaseProducts.Designer.cs">
       <DependentUpon>201804142121135_SeedBaseProducts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804150040008_UpdateProductModel8.cs" />
+    <Compile Include="Migrations\201804150040008_UpdateProductModel8.Designer.cs">
+      <DependentUpon>201804150040008_UpdateProductModel8.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -445,6 +449,7 @@
     <Content Include="Views\Checkout\OrderPlaced.cshtml" />
     <Content Include="Views\Products\EditProduct.cshtml" />
     <Content Include="Views\Products\NewProduct.cshtml" />
+    <Content Include="Views\Products\Report.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -573,6 +578,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804142121135_SeedBaseProducts.resx">
       <DependentUpon>201804142121135_SeedBaseProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804150040008_UpdateProductModel8.resx">
+      <DependentUpon>201804150040008_UpdateProductModel8.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

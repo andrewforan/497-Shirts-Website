@@ -122,14 +122,14 @@ namespace Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditProduct(int id)
+        public ActionResult EditProduct(ProductsViewModel pv)
         {
             Product p = new Product();
-            p = _context.Products.First(x => x.ID == id);
+            p = _context.Products.First(x => x.ID == pv.ID);
 
             var view = new Product()
             {
-                ID = id,
+                ID = pv.ID,
                 Name = p.Name,
                 Price = p.Price,
                 ImageLink = p.ImageLink,
@@ -142,12 +142,29 @@ namespace Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteProduct(int id)
+        public ActionResult DeleteProduct(ProductsViewModel pv)
         {
             Product p = new Product();
-            p = _context.Products.First(x => x.ID == id);
+            p = _context.Products.First(x => x.ID == pv.ID); //base
             _context.Products.Remove(p);
             _context.SaveChanges();
+
+            p = _context.Products.First(x => x.ID == (pv.ID + 1)); //small
+            _context.Products.Remove(p);
+            _context.SaveChanges();
+
+            p = _context.Products.First(x => x.ID == (pv.ID + 2)); //medium
+            _context.Products.Remove(p);
+            _context.SaveChanges();
+
+            p = _context.Products.First(x => x.ID == (pv.ID + 3)); //large
+            _context.Products.Remove(p);
+            _context.SaveChanges();
+
+            p = _context.Products.First(x => x.ID == (pv.ID + 4)); //xlarge
+            _context.Products.Remove(p);
+            _context.SaveChanges();
+
 
             return RedirectToAction("Index", "Products");
         }
@@ -173,25 +190,93 @@ namespace Website.Controllers
             else
             {
                 Product updatedProduct = new Product();
-                updatedProduct = _context.Products.First(x => x.ID == p.ID);
 
+                updatedProduct = _context.Products.First(x => x.ID == p.ID);
                 updatedProduct.Name = p.Name;
                 updatedProduct.Price = p.Price;
                 updatedProduct.ImageLink = p.ImageLink;
                 updatedProduct.Size = p.Size;
                 updatedProduct.CategoryId = p.CategoryId;
                 updatedProduct.NumberInStock = p.NumberInStock;
-
                 _context.Products.Attach(updatedProduct);
-                var entry = _context.Entry(updatedProduct);
-                entry.Property(e => e.Name).IsModified = true;
-                entry.Property(e => e.Price).IsModified = true;
-                entry.Property(e => e.ImageLink).IsModified = true;
-                entry.Property(e => e.Size).IsModified = true;
-                entry.Property(e => e.CategoryId).IsModified = true;
-                entry.Property(e => e.NumberInStock).IsModified = true;
-
+                var baseModel = _context.Entry(updatedProduct);
+                baseModel.Property(e => e.Name).IsModified = true;
+                baseModel.Property(e => e.Price).IsModified = true;
+                baseModel.Property(e => e.ImageLink).IsModified = true;
+                baseModel.Property(e => e.Size).IsModified = true;
+                baseModel.Property(e => e.CategoryId).IsModified = true;
+                baseModel.Property(e => e.NumberInStock).IsModified = true;
                 _context.SaveChanges();
+
+                updatedProduct = _context.Products.First(x => x.ID == (p.ID + 1));
+                updatedProduct.Name = p.Name;
+                updatedProduct.Price = p.Price;
+                updatedProduct.ImageLink = p.ImageLink;
+                updatedProduct.Size = p.Size;
+                updatedProduct.CategoryId = p.CategoryId;
+                updatedProduct.NumberInStock = p.NumberInStock;
+                _context.Products.Attach(updatedProduct);
+                var small = _context.Entry(updatedProduct);
+                small.Property(e => e.Name).IsModified = true;
+                small.Property(e => e.Price).IsModified = true;
+                small.Property(e => e.ImageLink).IsModified = true;
+                small.Property(e => e.Size).IsModified = true;
+                small.Property(e => e.CategoryId).IsModified = true;
+                small.Property(e => e.NumberInStock).IsModified = true;
+                _context.SaveChanges();
+
+                updatedProduct = _context.Products.First(x => x.ID == (p.ID + 2));
+                updatedProduct.Name = p.Name;
+                updatedProduct.Price = p.Price;
+                updatedProduct.ImageLink = p.ImageLink;
+                updatedProduct.Size = p.Size;
+                updatedProduct.CategoryId = p.CategoryId;
+                updatedProduct.NumberInStock = p.NumberInStock;
+                _context.Products.Attach(updatedProduct);
+                var medium = _context.Entry(updatedProduct);
+                medium.Property(e => e.Name).IsModified = true;
+                medium.Property(e => e.Price).IsModified = true;
+                medium.Property(e => e.ImageLink).IsModified = true;
+                medium.Property(e => e.Size).IsModified = true;
+                medium.Property(e => e.CategoryId).IsModified = true;
+                medium.Property(e => e.NumberInStock).IsModified = true;
+                _context.SaveChanges();
+
+                updatedProduct = _context.Products.First(x => x.ID == (p.ID + 3));
+                updatedProduct.Name = p.Name;
+                updatedProduct.Price = p.Price;
+                updatedProduct.ImageLink = p.ImageLink;
+                updatedProduct.Size = p.Size;
+                updatedProduct.CategoryId = p.CategoryId;
+                updatedProduct.NumberInStock = p.NumberInStock;
+                _context.Products.Attach(updatedProduct);
+                var large = _context.Entry(updatedProduct);
+                large.Property(e => e.Name).IsModified = true;
+                large.Property(e => e.Price).IsModified = true;
+                large.Property(e => e.ImageLink).IsModified = true;
+                large.Property(e => e.Size).IsModified = true;
+                large.Property(e => e.CategoryId).IsModified = true;
+                large.Property(e => e.NumberInStock).IsModified = true;
+                _context.SaveChanges();
+
+                updatedProduct = _context.Products.First(x => x.ID == (p.ID + 4));
+                updatedProduct.Name = p.Name;
+                updatedProduct.Price = p.Price;
+                updatedProduct.ImageLink = p.ImageLink;
+                updatedProduct.Size = p.Size;
+                updatedProduct.CategoryId = p.CategoryId;
+                updatedProduct.NumberInStock = p.NumberInStock;
+                _context.Products.Attach(updatedProduct);
+                var xlarge = _context.Entry(updatedProduct);
+                xlarge.Property(e => e.Name).IsModified = true;
+                xlarge.Property(e => e.Price).IsModified = true;
+                xlarge.Property(e => e.ImageLink).IsModified = true;
+                xlarge.Property(e => e.Size).IsModified = true;
+                xlarge.Property(e => e.CategoryId).IsModified = true;
+                xlarge.Property(e => e.NumberInStock).IsModified = true;
+                _context.SaveChanges();
+
+
             }
 
             return RedirectToAction("Index", "Products");
@@ -213,7 +298,6 @@ namespace Website.Controllers
                     Name = p.Name,
                     Price = p.Price,
                     ImageLink = p.ImageLink,
-                    Size = p.Size,
                     CategoryId = p.CategoryId,
                     NumberInStock = p.NumberInStock,
                 };
@@ -222,11 +306,43 @@ namespace Website.Controllers
             }
             else
             {
+                int numberInStock = p.NumberInStock;
+
+                p.NumberInStock = 0;
+                p.Size = "Blank";
+                p.Viewable = true;
+                _context.Products.Add(p);
+                _context.SaveChanges();
+
+                int max = _context.Products.Max(x => x.ID);
+                p.ParentID = max;
+
+                p.NumberInStock = numberInStock;
+                p.Viewable = false;
+                p.Size = "Small";
+                _context.Products.Add(p);
+                _context.SaveChanges();
+
+                p.Size = "Medium";
+                _context.Products.Add(p);
+                _context.SaveChanges();
+
+                p.Size = "Large";
+                _context.Products.Add(p);
+                _context.SaveChanges();
+
+                p.Size = "Extra Large";
                 _context.Products.Add(p);
                 _context.SaveChanges();
             }
 
             return RedirectToAction("Index", "Products");
+        }
+
+        [HttpPost]
+        public ActionResult Report()
+        {
+            return View("Report");
         }
     }
 }
