@@ -378,6 +378,7 @@
     <Compile Include="Models\RoleName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\OrdersViewModel.cs" />
     <Compile Include="ViewModels\ProductsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -449,7 +450,9 @@
     <Content Include="Views\Checkout\OrderPlaced.cshtml" />
     <Content Include="Views\Products\EditProduct.cshtml" />
     <Content Include="Views\Products\NewProduct.cshtml" />
-    <Content Include="Views\Products\Report.cshtml" />
+    <Content Include="Views\Products\Reports.cshtml" />
+    <Content Include="Views\Products\ItemRevenueReport.cshtml" />
+    <Content Include="Views\Products\ItemSizeReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

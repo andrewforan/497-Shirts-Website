@@ -1,0 +1,126 @@
+﻿@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Reports Available</h2>
+<br />
+
+<div class="col-md-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 style="text-align:center;" class="panel-title">
+                Item Revenue Report
+            </h3>
+        </div>
+        <div class="panel-footer">
+            <div style="text-align:center;">Number of times each item has been sold and the total revenue gained from these items. Ordered by the top selling items.</div>
+
+            <br />
+
+            @using (Html.BeginForm("ItemRevenueReport", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="row">
+                    <div class="form-group col-lg-offset-4 col-lg-12">
+                        <input type="hidden" value="id" name="save">
+                        <button id="buttonID" class="btn btn-primary btn-md" type="submit"><span class="glyphicon glyphicon-eye-open"></span>  View</button>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <div class="clearfix">
+        </div>
+
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 style="text-align:center;" class="panel-title">
+                Category Revenue Report
+            </h3>
+        </div>
+        <div class="panel-footer">
+            <div style="text-align:center;">Each category’s total revenue, the number of different items in the category, and their average revenue per item. Ordered by highest average revenue.</div>
+
+            <br />
+
+            @using (Html.BeginForm("ItemRevenueReport", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="row">
+                    <div class="form-group col-lg-offset-4 col-lg-12">
+                        <input type="hidden" value="id" name="save">
+                        <button id="buttonID" class="btn btn-primary btn-md" type="submit"><span class="glyphicon glyphicon-eye-open"></span>  View</button>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <div class="clearfix">
+        </div>
+
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 style="text-align:center;" class="panel-title">
+                Item Size Report
+            </h3>
+        </div>
+        <div class="panel-footer">
+            <div style="text-align:center;">Each size and the number of times items of that size have been sold, along with the total quantity in stock for the size.</div>
+
+            <br />
+
+            @using (Html.BeginForm("ItemSizeReport", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="row">
+                    <div class="form-group col-lg-offset-4 col-lg-12">
+                        <input type="hidden" value="id" name="save">
+                        <button id="buttonID" class="btn btn-primary btn-md" type="submit"><span class="glyphicon glyphicon-eye-open"></span>  View</button>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <div class="clearfix">
+        </div>
+
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 style="text-align:center;" class="panel-title">
+                Yearly Revenue Report
+            </h3>
+        </div>
+        <div class="panel-footer">
+            <div style="text-align:center;">Total revenues of the store by year.</div>
+
+            <br />
+
+            @using (Html.BeginForm("ItemRevenueReport", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="row">
+                    <div class="form-group col-lg-offset-4 col-lg-12">
+                        <input type="hidden" value="id" name="save">
+                        <button id="buttonID" class="btn btn-primary btn-md" type="submit"><span class="glyphicon glyphicon-eye-open"></span>  View</button>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <div class="clearfix">
+        </div>
+
+    </div>
+</div>

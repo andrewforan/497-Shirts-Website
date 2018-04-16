@@ -340,9 +340,134 @@ namespace Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult Report()
+        public ActionResult Reports()
         {
-            return View("Report");
+            return View("Reports");
+        }
+
+        [HttpPost]
+        public ActionResult ItemRevenueReport()
+        {
+            var orders = _context.Order.ToList();
+            List<Product> itemOrderedList = new List<Product>();
+
+            foreach (var order in orders)
+            {
+                string[] items = order.ItemsOrdered.Split(',');
+
+                for (int i = 0; i < items.Count(); i++)
+                {
+                    try
+                    {
+                        string[] detailSplit = items[i].Split('x');
+                        int ID = int.Parse(detailSplit[0]);
+                        int quantity = int.Parse(detailSplit[1]);
+
+                        Product p = new Product();
+                        p = _context.Products.First(x => x.ID == ID);
+                        p.NumberInStock = quantity; // number in stock used for quanitity
+                        itemOrderedList.Add(p);
+                    }
+                    catch
+                    {
+                        //
+                    }
+                }
+            }
+
+            List<Product> combinedItemList = new List<Product>();
+
+            for (int x = 0; x < itemOrderedList.Count(); x++)
+            {
+                int quantity = 0;
+
+                for (int y = 0; y < itemOrderedList.Count(); y++)
+                {
+                    if (itemOrderedList[x].ParentID == itemOrderedList[y].ParentID)
+                    {
+                        quantity += itemOrderedList[y].NumberInStock;
+                    }
+                }
+                Product p = new Product();
+                p.ID = itemOrderedList[x].ParentID;
+                p.Name = itemOrderedList[x].Name;
+                p.Price = itemOrderedList[x].Price;
+                p.NumberInStock = quantity;
+                combinedItemList.Add(p);
+            }
+
+            combinedItemList = combinedItemList.GroupBy(x => x.ID).Select(x => x.First()).ToList(); //remove duplicates
+            combinedItemList = combinedItemList.OrderByDescending(x => x.NumberInStock).ToList(); // sort by highest quantity sold
+
+            var viewModel = new OrdersViewModel
+            {
+                productsOrdered = combinedItemList,
+            };
+
+            return View("ItemRevenueReport", viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult ItemSizeReport()
+        {
+            var orders = _context.Order.ToList();
+            List<Product> itemOrderedList = new List<Product>();
+
+            foreach (var order in orders)
+            {
+                string[] items = order.ItemsOrdered.Split(',');
+
+                for (int i = 0; i < items.Count(); i++)
+                {
+                    try
+                    {
+                        string[] detailSplit = items[i].Split('x');
+                        int ID = int.Parse(detailSplit[0]);
+                        int quantity = int.Parse(detailSplit[1]);
+
+                        Product p = new Product();
+                        p = _context.Products.First(x => x.ID == ID);
+                        p.NumberInStock = quantity; // number in stock used for quanitity
+                        itemOrderedList.Add(p);
+                    }
+                    catch
+                    {
+                        //
+                    }
+                }
+            }
+
+            List<Product> combinedItemList = new List<Product>();
+
+            for (int x = 0; x < itemOrderedList.Count(); x++)
+            {
+                int quantity = 0;
+
+                for (int y = 0; y < itemOrderedList.Count(); y++)
+                {
+                    if (itemOrderedList[x].ID == itemOrderedList[y].ID)
+                    {
+                        quantity += itemOrderedList[y].NumberInStock;
+                    }
+                }
+                Product p = new Product();
+                p.ID = itemOrderedList[x].ID;
+                p.Name = itemOrderedList[x].Name;
+                p.Price = itemOrderedList[x].Price;
+                p.Size = itemOrderedList[x].Size;
+                p.NumberInStock = quantity;
+                combinedItemList.Add(p);
+            }
+
+            combinedItemList = combinedItemList.GroupBy(x => x.ID).Select(x => x.First()).ToList(); //remove duplicates
+            combinedItemList = combinedItemList.OrderByDescending(x => x.NumberInStock).ToList(); // sort by highest quantity sold
+
+            var viewModel = new OrdersViewModel
+            {
+                productsOrdered = combinedItemList,
+            };
+
+            return View("ItemSizeReport", viewModel);
         }
     }
 }

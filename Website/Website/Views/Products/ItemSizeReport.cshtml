@@ -1,0 +1,48 @@
+﻿@model Website.ViewModels.OrdersViewModel
+
+@{
+    ViewBag.Title = "ItemSizeReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Item Size Report</h2>
+<br />
+
+
+@{decimal totalRev = 0;}
+
+<div id="skills">
+    <table class="table table-bordered table-hover table-light">
+        <thead class="thead-dark">
+            <tr>
+                <th>Product</th>
+                <th>Times Sold</th>
+                <th>Total Revenue Gained</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var product in Model.productsOrdered)
+            {
+                totalRev = (product.Price * product.NumberInStock);
+                <tr>
+                    <th scope="row">@product.Name - @product.Size</th>
+                    <td>@product.NumberInStock</td>
+                    <td>$@totalRev</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+@using (Html.BeginForm("Reports", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="form-group col-lg-12">
+            <input type="hidden" value="id" name="save">
+            <button id="buttonID" class="btn btn-primary btn-md" type="submit"><span class="glyphicon glyphicon-circle-arrow-left"></span> Return to Report Selection</button>
+        </div>
+    </div>
+}
+

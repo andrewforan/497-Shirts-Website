@@ -44,7 +44,7 @@ namespace Website.Controllers
 
                         Product p = new Product();
                         p = _context.Products.First(x => x.ID == ID);
-                        p.NumberInStock = quantity; // number in stock used for quanitity, hack
+                        p.NumberInStock = quantity; // number in stock used for quanitity
                         total += p.Price;
                         cartItems.Add(p);
                     }
