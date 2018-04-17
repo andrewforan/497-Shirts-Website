@@ -19,6 +19,7 @@
 
             @using (Html.BeginForm("ItemRevenueReport", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
+                @Html.AntiForgeryToken()
                 <div class="row">
                     <div class="form-group col-lg-offset-4 col-lg-12">
                         <input type="hidden" value="id" name="save">
@@ -49,6 +50,7 @@
 
             @using (Html.BeginForm("ItemRevenueReport", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
+                @Html.AntiForgeryToken()
                 <div class="row">
                     <div class="form-group col-lg-offset-4 col-lg-12">
                         <input type="hidden" value="id" name="save">
@@ -79,6 +81,7 @@
 
             @using (Html.BeginForm("ItemSizeReport", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
+                @Html.AntiForgeryToken()
                 <div class="row">
                     <div class="form-group col-lg-offset-4 col-lg-12">
                         <input type="hidden" value="id" name="save">
@@ -109,6 +112,7 @@
 
             @using (Html.BeginForm("ItemRevenueReport", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
+                @Html.AntiForgeryToken()
                 <div class="row">
                     <div class="form-group col-lg-offset-4 col-lg-12">
                         <input type="hidden" value="id" name="save">

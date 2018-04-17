@@ -38,6 +38,7 @@
 
 @using (Html.BeginForm("Reports", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    @Html.AntiForgeryToken()
     <div class="row">
         <div class="form-group col-lg-12">
             <input type="hidden" value="id" name="save">

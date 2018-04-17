@@ -7,6 +7,7 @@
 
 @using (Html.BeginForm("NewProduct", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    @Html.AntiForgeryToken()
     <h2>PRODUCT LIST</h2>
 
     <div class="col-lg-4">
@@ -17,6 +18,7 @@
 
 @using (Html.BeginForm("Reports", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    @Html.AntiForgeryToken()
     <br /><br /><br />
     <div class="col-lg-4">
         <input type="hidden" value="contact" name="save">
@@ -52,6 +54,7 @@ else
                         <div class="text-center">
                             @using (Html.BeginForm("DeleteProduct", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
+                                @Html.AntiForgeryToken()
                                 Model.ID = product.ID;
                                 @Html.HiddenFor(m => m.ID);
                                 <div class="pull-right">
@@ -66,6 +69,7 @@ else
 
                             @using (Html.BeginForm("EditProduct", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
+                                @Html.AntiForgeryToken()
                                 Model.ID = product.ID;
                                 @Html.HiddenFor(m => m.ID);
                                 <div>
@@ -81,25 +85,26 @@ else
 
                         @using (Html.BeginForm("AddProduct", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
                         {
+                            @Html.AntiForgeryToken()
                             Model.ID = product.ID;
                             @Html.HiddenFor(m => m.ID);
 
                             <div class="text-center">
                                 <div class="btn btn-link">$@product.Price</div><br />
                                 @Html.DropDownListFor(
-                                          model => model.Size,
-                                              new SelectList(
-                                                  new List<Object>{
-                                                    new { value = "Small" , text = "Small"  },
-                                                    new { value = "Medium" , text = "Medium" },
-                                                    new { value = "Large" , text = "Large" },
-                                                    new { value = "Extra Large" , text = "Extra Large"}
-                                                      },
-                                                  "value",
-                                                  "text",
-                                                  Model.Size
-                                                 )
-                                              )<br /><br />
+                                                    model => model.Size,
+                                                        new SelectList(
+                                                            new List<Object>{
+                                                            new { value = "Small" , text = "Small"  },
+                                                            new { value = "Medium" , text = "Medium" },
+                                                            new { value = "Large" , text = "Large" },
+                                                            new { value = "Extra Large" , text = "Extra Large"}
+                                                                },
+                                                            "value",
+                                                            "text",
+                                                            Model.Size
+                                                           )
+                                                        )<br /><br />
                             </div>
                             <div class="pull-right">
 
@@ -126,101 +131,3 @@ else
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@*@{int buttonID = 0;}
-
-    @if (Model.Products.Count == 0)
-    {
-        <text>No products found.</text>
-    }
-    else
-    {
-        foreach (var product in Model.Products)
-        {
-            if (product.NumberInStock > 0)
-            {
-                Model.ID = product.ID;
-                <div class="col-md-3">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                @product.Name
-                            </h3>
-                        </div>
-                        <div class="panel-body">
-                            <img src=@product.ImageLink>
-                        </div>
-                        <div class="panel-footer">
-
-                            <div class="text-center">
-                                <h5>Size: @product.Size</h5> <div class="btn btn-link">$@product.Price</div>
-                            </div>
-
-                            @using (Html.BeginForm("AddProduct", "Products", new { id = Model.ID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
-                            {
-                                <div class="pull-right">
-                                    <div class="row">
-                                        <div class="form-group col-lg-4">
-                                            <input type="hidden" value="id" name="save">
-                                            <button id="@buttonID" class="btn btn-success btn-md" type="submit"> Add to Cart</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-
-                            @using (Html.BeginForm("DeleteProduct", "Products", new { id = Model.ID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
-                            {
-                                <div class="pull-right">
-                                    <div class="row">
-                                        <div class="form-group col-lg-4">
-                                            <input type="hidden" value="id" name="save">
-                                            <button id="@buttonID" class="btn btn-primary btn-md" type="submit"> Delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-
-                            @using (Html.BeginForm("EditProduct", "Products", new { id = Model.ID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
-                            {
-                                <div class="pull-right">
-                                    <div class="row">
-                                        <div class="form-group col-lg-4">
-                                            <input type="hidden" value="id" name="save">
-                                            <button id="@buttonID" class="btn btn-default btn-md" type="submit"> Edit</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-
-                            <div class="clearfix">
-                            </div>
-
-                            <script type="text/javascript">
-                                    document.getElementById(@buttonID).onclick = function () {
-                                        alert("Product added to cart!");
-                                    }
-
-                            </script>
-
-                        </div>
-                    </div>
-                </div>
-                buttonID++;
-            }
-        }
-    }*@
-

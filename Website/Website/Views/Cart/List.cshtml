@@ -37,6 +37,7 @@ else
 
                                     @using (Html.BeginForm("ContinueShopping", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                     {
+                                        @Html.AntiForgeryToken()
                                         <div class="col-xs-12">
                                             <input type="hidden" value="contact" name="save">
                                             <button class="btn btn-default btn-sm btn-block" type="submit"><span class="glyphicon glyphicon-share-alt"></span> Continue shopping</button>
@@ -111,6 +112,7 @@ else
 
                             @using (Html.BeginForm("Index", "Checkout", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
+                                @Html.AntiForgeryToken()
                                 <div class="col-xs-3">
                                     <input type="hidden" value="contact" name="save">
                                     <button class="btn btn-success btn-block" type="submit">Checkout</button>

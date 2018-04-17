@@ -19,20 +19,21 @@
         </thead>
         <tbody>
 
-                @foreach (var row in Model.SizeReportList)
-                {
-                    <tr>
-                        <th scope="row">@row.Size</th>
-                        <td>@row.TotalQuantitySold</td>
-                        <td>@row.TotalQuantityInStock</td>
-                    </tr>
-                }
+            @foreach (var row in Model.SizeReportList)
+            {
+                <tr>
+                    <th scope="row">@row.Size</th>
+                    <td>@row.TotalQuantitySold</td>
+                    <td>@row.TotalQuantityInStock</td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
 
 @using (Html.BeginForm("Reports", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    @Html.AntiForgeryToken()
     <div class="row">
         <div class="form-group col-lg-12">
             <input type="hidden" value="id" name="save">

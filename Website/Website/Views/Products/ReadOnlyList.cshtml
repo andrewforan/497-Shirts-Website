@@ -34,6 +34,7 @@ else
 
                         @using (Html.BeginForm("AddProduct", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
                         {
+                            @Html.AntiForgeryToken()
                             Model.ID = product.ID;
                             @Html.HiddenFor(m => m.ID);
 
