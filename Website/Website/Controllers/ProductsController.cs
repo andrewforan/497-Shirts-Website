@@ -508,5 +508,47 @@ namespace Website.Controllers
 
             return View("ItemSizeReport", viewModel);
         }
+
+        [HttpPost]
+        public ActionResult YearlyRevenueReport()
+        {
+            var orders = _context.Order.ToList();
+            List<Product> itemList = new List<Product>();
+
+            foreach (var order in orders)
+            {
+                if (order.OrderTime.Year != DateTime.Now.Year)
+                {
+
+                }
+
+                string[] items = order.ItemsOrdered.Split(',');
+
+                for (int i = 0; i < items.Count(); i++)
+                {
+                    try
+                    {
+                        string[] detailSplit = items[i].Split('x');
+                        int ID = int.Parse(detailSplit[0]);
+                        int quantity = int.Parse(detailSplit[1]);
+
+                        Product p = new Product();
+                        p = _context.Products.FirstOrDefault(x => x.ID == ID);
+                    }
+                    catch
+                    {
+                        //
+                    }
+                }
+            }
+
+            //var viewModel = new SizeReportViewModel
+            //{
+            //    SizeReportList = sizeDetails,
+            //};
+
+            return View("YearlyRevenueReport"/*, viewModel*/);
+        }
+
     }
 }

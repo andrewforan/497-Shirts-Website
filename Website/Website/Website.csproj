@@ -456,6 +456,7 @@
     <Content Include="Views\Products\Reports.cshtml" />
     <Content Include="Views\Products\ItemRevenueReport.cshtml" />
     <Content Include="Views\Products\ItemSizeReport.cshtml" />
+    <Content Include="Views\Products\YearlyRevenueReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

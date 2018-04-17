@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Yearly Revenue Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Yearly Revenue Report</h2>
+
+<br />
+
+<div id="skills">
+    <table class="table table-bordered table-hover table-light">
+        <thead class="thead-dark">
+            <tr>
+                <th>Year</th>
+                <th>Total Revenue</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @*@foreach (var row in Model.SizeReportList)
+            {
+                <tr>
+                    <th scope="row">@row.Size</th>
+                    <td>@row.TotalQuantitySold</td>
+                    <td>@row.TotalQuantityInStock</td>
+                </tr>
+            }*@
+        </tbody>
+    </table>
+</div>
+
+@using (Html.BeginForm("Reports", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="form-group col-lg-12">
+            <input type="hidden" value="id" name="save">
+            <button id="buttonID" class="btn btn-primary btn-md" type="submit"><span class="glyphicon glyphicon-circle-arrow-left"></span> Return to Report Selection</button>
+        </div>
+    </div>
+}
+
