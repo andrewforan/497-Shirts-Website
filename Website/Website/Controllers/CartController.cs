@@ -27,7 +27,7 @@ namespace Website.Controllers
         {
             decimal total = 0;
             Cart c = new Cart();
-            c = _context.Cart.FirstOrDefault (x => x.User == System.Web.HttpContext.Current.User.Identity.Name);
+            c = _context.Cart.FirstOrDefault (x => x.User == User.Identity.Name);
 
             if (c.Contents != null)
             {
@@ -83,7 +83,7 @@ namespace Website.Controllers
         public ActionResult RemoveProduct(ProductsViewModel pv)
         {
             Cart cart = new Cart();
-            cart = _context.Cart.FirstOrDefault(x => x.User == System.Web.HttpContext.Current.User.Identity.Name);
+            cart = _context.Cart.FirstOrDefault(x => x.User == User.Identity.Name);
 
 
             if (cart.Contents != null)
@@ -124,7 +124,7 @@ namespace Website.Controllers
         public ActionResult UpdateQuantity(ProductsViewModel pv)
         {
             Cart cart = new Cart();
-            cart = _context.Cart.FirstOrDefault(x => x.User == System.Web.HttpContext.Current.User.Identity.Name);
+            cart = _context.Cart.FirstOrDefault(x => x.User == User.Identity.Name);
 
 
             if (cart.Contents != null)

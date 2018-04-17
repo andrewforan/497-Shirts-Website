@@ -61,9 +61,9 @@ namespace Website.Controllers
             else
             {
                 Cart cart = new Cart();
-                cart = _context.Cart.First(x => x.User == System.Web.HttpContext.Current.User.Identity.Name);
+                cart = _context.Cart.FirstOrDefault(x => x.User == User.Identity.Name);
 
-                currentOrder.Email = System.Web.HttpContext.Current.User.Identity.Name;
+                currentOrder.Email = User.Identity.Name;
                 currentOrder.ItemsOrdered = cart.Contents;
                 currentOrder.OrderTime = DateTime.Now;
                 _context.Order.Add(currentOrder);
@@ -85,7 +85,7 @@ namespace Website.Controllers
                         int quantity = int.Parse(detailSplit[1]);
 
                         Product p = new Product();
-                        p = _context.Products.First(x => x.ID == ID);
+                        p = _context.Products.FirstOrDefault(x => x.ID == ID);
                         p.NumberInStock = p.NumberInStock - quantity;
 
                         _context.Products.Attach(p);

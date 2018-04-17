@@ -47,10 +47,10 @@ namespace Website.Controllers
         public ActionResult AddProduct(ProductsViewModel pv) // to cart
         {
             Cart cart = new Cart();
-            cart = _context.Cart.First(x => x.User == System.Web.HttpContext.Current.User.Identity.Name);
+            cart = _context.Cart.FirstOrDefault(x => x.User == User.Identity.Name);
 
             Product p = new Product();
-            p = _context.Products.First(x => x.ParentID == pv.ID && x.Size == pv.Size);
+            p = _context.Products.FirstOrDefault(x => x.ParentID == pv.ID && x.Size == pv.Size);
 
             string currItem = (p.ID + "x" + pv.quantity + ",");
 
@@ -125,7 +125,7 @@ namespace Website.Controllers
         public ActionResult EditProduct(ProductsViewModel pv)
         {
             Product p = new Product();
-            p = _context.Products.First(x => x.ID == pv.ID);
+            p = _context.Products.FirstOrDefault(x => x.ID == pv.ID);
 
             var view = new Product()
             {
@@ -145,23 +145,23 @@ namespace Website.Controllers
         public ActionResult DeleteProduct(ProductsViewModel pv)
         {
             Product p = new Product();
-            p = _context.Products.First(x => x.ID == pv.ID); //base
+            p = _context.Products.FirstOrDefault(x => x.ID == pv.ID); //base
             _context.Products.Remove(p);
             _context.SaveChanges();
 
-            p = _context.Products.First(x => x.ID == (pv.ID + 1)); //small
+            p = _context.Products.FirstOrDefault(x => x.ID == (pv.ID + 1)); //small
             _context.Products.Remove(p);
             _context.SaveChanges();
 
-            p = _context.Products.First(x => x.ID == (pv.ID + 2)); //medium
+            p = _context.Products.FirstOrDefault(x => x.ID == (pv.ID + 2)); //medium
             _context.Products.Remove(p);
             _context.SaveChanges();
 
-            p = _context.Products.First(x => x.ID == (pv.ID + 3)); //large
+            p = _context.Products.FirstOrDefault(x => x.ID == (pv.ID + 3)); //large
             _context.Products.Remove(p);
             _context.SaveChanges();
 
-            p = _context.Products.First(x => x.ID == (pv.ID + 4)); //xlarge
+            p = _context.Products.FirstOrDefault(x => x.ID == (pv.ID + 4)); //xlarge
             _context.Products.Remove(p);
             _context.SaveChanges();
 
@@ -191,7 +191,7 @@ namespace Website.Controllers
             {
                 Product updatedProduct = new Product();
 
-                updatedProduct = _context.Products.First(x => x.ID == p.ID);
+                updatedProduct = _context.Products.FirstOrDefault(x => x.ID == p.ID);
                 updatedProduct.Name = p.Name;
                 updatedProduct.Price = p.Price;
                 updatedProduct.ImageLink = p.ImageLink;
@@ -208,7 +208,7 @@ namespace Website.Controllers
                 baseModel.Property(e => e.NumberInStock).IsModified = true;
                 _context.SaveChanges();
 
-                updatedProduct = _context.Products.First(x => x.ID == (p.ID + 1));
+                updatedProduct = _context.Products.FirstOrDefault(x => x.ID == (p.ID + 1));
                 updatedProduct.Name = p.Name;
                 updatedProduct.Price = p.Price;
                 updatedProduct.ImageLink = p.ImageLink;
@@ -225,7 +225,7 @@ namespace Website.Controllers
                 small.Property(e => e.NumberInStock).IsModified = true;
                 _context.SaveChanges();
 
-                updatedProduct = _context.Products.First(x => x.ID == (p.ID + 2));
+                updatedProduct = _context.Products.FirstOrDefault(x => x.ID == (p.ID + 2));
                 updatedProduct.Name = p.Name;
                 updatedProduct.Price = p.Price;
                 updatedProduct.ImageLink = p.ImageLink;
@@ -259,7 +259,7 @@ namespace Website.Controllers
                 large.Property(e => e.NumberInStock).IsModified = true;
                 _context.SaveChanges();
 
-                updatedProduct = _context.Products.First(x => x.ID == (p.ID + 4));
+                updatedProduct = _context.Products.FirstOrDefault(x => x.ID == (p.ID + 4));
                 updatedProduct.Name = p.Name;
                 updatedProduct.Price = p.Price;
                 updatedProduct.ImageLink = p.ImageLink;
@@ -364,7 +364,7 @@ namespace Website.Controllers
                         int quantity = int.Parse(detailSplit[1]);
 
                         Product p = new Product();
-                        p = _context.Products.First(x => x.ID == ID);
+                        p = _context.Products.FirstOrDefault(x => x.ID == ID);
                         p.NumberInStock = quantity; // number in stock used for quanitity
                         itemOrderedList.Add(p);
                     }
@@ -396,7 +396,7 @@ namespace Website.Controllers
                 combinedItemList.Add(p);
             }
 
-            combinedItemList = combinedItemList.GroupBy(x => x.ID).Select(x => x.First()).ToList(); //remove duplicates
+            combinedItemList = combinedItemList.GroupBy(x => x.ID).Select(x => x.FirstOrDefault()).ToList(); //remove duplicates
             combinedItemList = combinedItemList.OrderByDescending(x => x.NumberInStock).ToList(); // sort by highest quantity sold
 
             var viewModel = new OrdersViewModel
@@ -426,7 +426,7 @@ namespace Website.Controllers
                         int quantity = int.Parse(detailSplit[1]);
 
                         Product p = new Product();
-                        p = _context.Products.First(x => x.ID == ID);
+                        p = _context.Products.FirstOrDefault(x => x.ID == ID);
                         p.NumberInStock = quantity; // number in stock used for quanitity
                         itemOrderedList.Add(p);
                     }
@@ -459,7 +459,7 @@ namespace Website.Controllers
                 combinedItemList.Add(p);
             }
 
-            combinedItemList = combinedItemList.GroupBy(x => x.ID).Select(x => x.First()).ToList(); //remove duplicates
+            combinedItemList = combinedItemList.GroupBy(x => x.ID).Select(x => x.FirstOrDefault()).ToList(); //remove duplicates
             combinedItemList = combinedItemList.OrderByDescending(x => x.NumberInStock).ToList(); // sort by highest quantity sold
 
             var viewModel = new OrdersViewModel
