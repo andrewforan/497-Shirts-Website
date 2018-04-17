@@ -411,7 +411,7 @@ namespace Website.Controllers
         public ActionResult ItemSizeReport()
         {
             var orders = _context.Order.ToList();
-            List<Product> itemOrderedList = new List<Product>();
+            List<SizeReport> itemList = new List<SizeReport>();
 
             foreach (var order in orders)
             {
@@ -427,8 +427,12 @@ namespace Website.Controllers
 
                         Product p = new Product();
                         p = _context.Products.FirstOrDefault(x => x.ID == ID);
-                        p.NumberInStock = quantity; // number in stock used for quanitity
-                        itemOrderedList.Add(p);
+
+                        SizeReport sr = new SizeReport();
+                        sr.Size = p.Size;
+                        sr.Quantity = quantity;
+                        sr.NumberInStock = p.NumberInStock;
+                        itemList.Add(sr);
                     }
                     catch
                     {
@@ -437,34 +441,69 @@ namespace Website.Controllers
                 }
             }
 
-            List<Product> combinedItemList = new List<Product>();
+            int numOrderedSmall = 0;
+            int totalStockSmall = 0;
+            int numOrderedMedium = 0;
+            int totalStockMedium = 0;
+            int numOrderedLarge = 0;
+            int totalStockLarge = 0;
+            int numOrderedXLarge = 0;
+            int totalStockXLarge = 0;
 
-            for (int x = 0; x < itemOrderedList.Count(); x++)
+            List<SizeReport> sizeDetails = new List<SizeReport>();
+
+
+
+            foreach (var item in itemList)
             {
-                int quantity = 0;
-
-                for (int y = 0; y < itemOrderedList.Count(); y++)
+                switch (item.Size)
                 {
-                    if (itemOrderedList[x].ID == itemOrderedList[y].ID)
-                    {
-                        quantity += itemOrderedList[y].NumberInStock;
-                    }
+                    case "Small":
+                        numOrderedSmall += item.Quantity; //Stock ordered
+                        totalStockSmall += item.NumberInStock;
+                        break;
+                    case "Medium":
+                        numOrderedMedium += item.Quantity; //Stock ordered
+                        totalStockMedium += item.NumberInStock;
+                        break;
+                    case "Large":
+                        numOrderedLarge += item.Quantity; //Stock ordered
+                        totalStockLarge += item.NumberInStock;
+                        break;
+                    case "Extra Large":
+                        numOrderedXLarge += item.Quantity; //Stock ordered
+                        totalStockXLarge += item.NumberInStock;
+                        break;
                 }
-                Product p = new Product();
-                p.ID = itemOrderedList[x].ID;
-                p.Name = itemOrderedList[x].Name;
-                p.Price = itemOrderedList[x].Price;
-                p.Size = itemOrderedList[x].Size;
-                p.NumberInStock = quantity;
-                combinedItemList.Add(p);
             }
 
-            combinedItemList = combinedItemList.GroupBy(x => x.ID).Select(x => x.FirstOrDefault()).ToList(); //remove duplicates
-            combinedItemList = combinedItemList.OrderByDescending(x => x.NumberInStock).ToList(); // sort by highest quantity sold
+            SizeReport smallDetails = new SizeReport();
+            smallDetails.Size = "Small";
+            smallDetails.TotalQuantitySold = numOrderedSmall;
+            smallDetails.TotalQuantityInStock = totalStockSmall;
+            sizeDetails.Add(smallDetails);
 
-            var viewModel = new OrdersViewModel
+            SizeReport mediumDetails = new SizeReport();
+            mediumDetails.Size = "Medium";
+            mediumDetails.TotalQuantitySold = numOrderedMedium;
+            mediumDetails.TotalQuantityInStock = totalStockMedium;
+            sizeDetails.Add(mediumDetails);
+
+            SizeReport largeDetails = new SizeReport();
+            largeDetails.Size = "Large";
+            largeDetails.TotalQuantitySold = numOrderedLarge;
+            largeDetails.TotalQuantityInStock = totalStockLarge;
+            sizeDetails.Add(largeDetails);
+
+            SizeReport xlargeDetails = new SizeReport();
+            xlargeDetails.Size = "Extra Large";
+            xlargeDetails.TotalQuantitySold = numOrderedXLarge;
+            xlargeDetails.TotalQuantityInStock = totalStockXLarge;
+            sizeDetails.Add(xlargeDetails);
+
+            var viewModel = new SizeReportViewModel
             {
-                productsOrdered = combinedItemList,
+                SizeReportList = sizeDetails,
             };
 
             return View("ItemSizeReport", viewModel);

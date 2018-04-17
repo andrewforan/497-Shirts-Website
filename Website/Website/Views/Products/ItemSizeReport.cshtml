@@ -1,37 +1,32 @@
-﻿@model Website.ViewModels.OrdersViewModel
+﻿@model Website.ViewModels.SizeReportViewModel
 
 @{
-    ViewBag.Title = "ItemSizeReport";
+    ViewBag.Title = "Item Size Report";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Item Size Report</h2>
 <br />
 
-
-@{decimal totalRev = 0;}
-
 <div id="skills">
     <table class="table table-bordered table-hover table-light">
         <thead class="thead-dark">
             <tr>
-                <th>Product</th>
+                <th>Size</th>
                 <th>Times Sold</th>
-                <th>Total Revenue Gained</th>
+                <th>Total Quantity In Stock</th>
             </tr>
         </thead>
         <tbody>
 
-            @foreach (var product in Model.productsOrdered)
-            {
-                totalRev = (product.Price * product.NumberInStock);
-                <tr>
-                    <th scope="row">@product.Name - @product.Size</th>
-                    <td>@product.NumberInStock</td>
-                    <td>$@totalRev</td>
-                </tr>
-            }
-
+                @foreach (var row in Model.SizeReportList)
+                {
+                    <tr>
+                        <th scope="row">@row.Size</th>
+                        <td>@row.TotalQuantitySold</td>
+                        <td>@row.TotalQuantityInStock</td>
+                    </tr>
+                }
         </tbody>
     </table>
 </div>
