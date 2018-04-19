@@ -22,12 +22,12 @@
         </thead>
         <tbody>
 
-            @foreach (var product in Model.productsOrdered)
+            @foreach (var item in Model.productsOrdered)
             {
-                totalRev = (product.Price * product.NumberInStock);
+                totalRev = (item.Price * item.Quantity);
                 <tr>
-                    <th scope="row">@product.Name</th>
-                    <td>@product.NumberInStock</td>
+                    <th scope="row">@item.ItemName</th>
+                    <td>@item.Quantity</td>
                     <td>$@totalRev</td>
                 </tr>
             }

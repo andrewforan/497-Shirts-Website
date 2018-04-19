@@ -410,11 +410,11 @@ namespace Website.Controllers
         public ActionResult ItemRevenueReport()
         {
             var orders = _context.Order.ToList();
-            List<Product> itemOrderedList = new List<Product>();
+            List<Report> itemOrderedList = new List<Report>();
 
-            foreach (var order in orders)
+            for (int x = 0; x < orders.Count(); x++)
             {
-                string[] items = order.ItemsOrdered.Split(',');
+                string[] items = orders[x].ItemsOrdered.Split(',');
 
                 for (int i = 0; i < items.Count(); i++)
                 {
@@ -425,9 +425,14 @@ namespace Website.Controllers
                         int quantity = int.Parse(detailSplit[1]);
 
                         Product p = new Product();
-                        p = _context.Products.FirstOrDefault(x => x.ID == ID);
-                        p.NumberInStock = quantity; // number in stock used for quanitity
-                        itemOrderedList.Add(p);
+                        p = _context.Products.FirstOrDefault(c => c.ID == ID);
+
+                        Report r = new Report();
+                        r.ID = p.ParentID;
+                        r.ItemName = p.Name;
+                        r.Price = p.Price;
+                        r.Quantity = quantity;
+                        itemOrderedList.Add(r);
                     }
                     catch
                     {
@@ -436,7 +441,7 @@ namespace Website.Controllers
                 }
             }
 
-            List<Product> combinedItemList = new List<Product>();
+            List<Report> combinedItemList = new List<Report>();
 
             for (int x = 0; x < itemOrderedList.Count(); x++)
             {
@@ -444,17 +449,17 @@ namespace Website.Controllers
 
                 for (int y = 0; y < itemOrderedList.Count(); y++)
                 {
-                    if (itemOrderedList[x].ParentID == itemOrderedList[y].ParentID)
+                    if (itemOrderedList[x].ID == itemOrderedList[y].ID)
                     {
-                        quantity += itemOrderedList[y].NumberInStock;
+                        quantity += itemOrderedList[y].Quantity;
                     }
                 }
-                Product p = new Product();
-                p.ID = itemOrderedList[x].ParentID;
-                p.Name = itemOrderedList[x].Name;
-                p.Price = itemOrderedList[x].Price;
-                p.NumberInStock = quantity;
-                combinedItemList.Add(p);
+                Report item = new Report();
+                item.ID = itemOrderedList[x].ID;
+                item.ItemName = itemOrderedList[x].ItemName;
+                item.Price = itemOrderedList[x].Price;
+                item.Quantity = quantity;
+                combinedItemList.Add(item);
             }
 
             combinedItemList = combinedItemList.GroupBy(x => x.ID).Select(x => x.FirstOrDefault()).ToList(); //remove duplicates
@@ -489,11 +494,11 @@ namespace Website.Controllers
                         Product p = new Product();
                         p = _context.Products.FirstOrDefault(x => x.ID == ID);
 
-                        Report sr = new Report();
-                        sr.Size = p.Size;
-                        sr.Quantity = quantity;
-                        sr.NumberInStock = p.NumberInStock;
-                        itemList.Add(sr);
+                        Report s = new Report();
+                        s.Size = p.Size;
+                        s.Quantity = quantity;
+                        s.NumberInStock = p.NumberInStock;
+                        itemList.Add(s);
                     }
                     catch
                     {

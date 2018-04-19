@@ -14,5 +14,8 @@ namespace Website.Models
         public int NumberInStock { get; set; }
         public int Year { get; set; }
         public decimal TotalRevenue { get; set; }
+        public int ID { get; set; }
+        public decimal Price { get; set; }
+        public string ItemName { get; set; }
     }
 }
