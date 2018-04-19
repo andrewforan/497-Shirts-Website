@@ -1,4 +1,5 @@
-﻿
+﻿@model Website.ViewModels.ReportViewModel
+
 @{
     ViewBag.Title = "Yearly Revenue Report";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,14 +19,13 @@
         </thead>
         <tbody>
 
-            @*@foreach (var row in Model.SizeReportList)
+            @foreach (var row in Model.SizeReportList)
             {
                 <tr>
-                    <th scope="row">@row.Size</th>
-                    <td>@row.TotalQuantitySold</td>
-                    <td>@row.TotalQuantityInStock</td>
+                    <th scope="row">@row.Year</th>
+                    <td>$@row.TotalRevenue</td>
                 </tr>
-            }*@
+            }
         </tbody>
     </table>
 </div>

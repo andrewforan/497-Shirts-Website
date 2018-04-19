@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using Website.Models;
@@ -16,7 +17,10 @@ namespace Website.ViewModels
 
         public decimal Price { get; set; }
 
-        public string ImageLink { get; set; }
+        public byte[] ImageUploadBytes { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
 
         public string Size { get; set; }
 

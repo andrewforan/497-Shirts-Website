@@ -6,8 +6,8 @@ using Website.Models;
 
 namespace Website.ViewModels
 {
-    public class SizeReportViewModel
+    public class ReportViewModel
     {
-        public List<SizeReport> SizeReportList { get; set; }
+        public List<Report> SizeReportList { get; set; }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace Website.Models
 {
@@ -17,8 +19,14 @@ namespace Website.Models
         [Required]
         public decimal Price { get; set; }
 
-        [Required]
-        public string ImageLink { get; set; }
+        [Display(Name = "Product Image")]
+        public byte[] ImageUploadBytes { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public string ImageMimeType { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
 
         [StringLength(255)]
         public string Size { get; set; }

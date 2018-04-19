@@ -53,7 +53,7 @@ else
                             total += (product.Price * product.NumberInStock);
                             <div class="row">
                                 <div class="col-xs-2">
-                                    <img class="img-responsive" src=@product.ImageLink>
+                                    <img class="img-responsive" src="@Url.Action("GetImage", "Products", new { product.ID })">
                                 </div>
                                 <div class="col-xs-4">
                                     <h4 class="product-name"><strong>@product.Name</strong></h4><h4><small>@product.Size</small></h4>

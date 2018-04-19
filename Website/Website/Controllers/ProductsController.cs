@@ -132,7 +132,8 @@ namespace Website.Controllers
                 ID = pv.ID,
                 Name = p.Name,
                 Price = p.Price,
-                ImageLink = p.ImageLink,
+                //ImageLink = p.ImageLink,
+                ImageUploadBytes = p.ImageUploadBytes,
                 Size = p.Size,
                 CategoryId = p.CategoryId,
                 NumberInStock = p.NumberInStock,
@@ -172,112 +173,112 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult SaveEditedProduct(Product p)
         {
-            if (!ModelState.IsValid)
-            {
-                var view = new Product()
-                {
-                    ID = p.ID,
-                    Name = p.Name,
-                    Price = p.Price,
-                    ImageLink = p.ImageLink,
-                    Size = p.Size,
-                    CategoryId = p.CategoryId,
-                    NumberInStock = p.NumberInStock,
-                };
+            //if (!ModelState.IsValid)
+            //{
+            //    var view = new Product()
+            //    {
+            //        ID = p.ID,
+            //        Name = p.Name,
+            //        Price = p.Price,
+            //        ImageLink = p.ImageLink,
+            //        Size = p.Size,
+            //        CategoryId = p.CategoryId,
+            //        NumberInStock = p.NumberInStock,
+            //    };
 
-                return View("EditProduct", view);
-            }
-            else
-            {
-                Product updatedProduct = new Product();
+            //    return View("EditProduct", view);
+            //}
+            //else
+            //{
+            //    Product updatedProduct = new Product();
 
-                updatedProduct = _context.Products.FirstOrDefault(x => x.ID == p.ID);
-                updatedProduct.Name = p.Name;
-                updatedProduct.Price = p.Price;
-                updatedProduct.ImageLink = p.ImageLink;
-                updatedProduct.Size = p.Size;
-                updatedProduct.CategoryId = p.CategoryId;
-                updatedProduct.NumberInStock = p.NumberInStock;
-                _context.Products.Attach(updatedProduct);
-                var baseModel = _context.Entry(updatedProduct);
-                baseModel.Property(e => e.Name).IsModified = true;
-                baseModel.Property(e => e.Price).IsModified = true;
-                baseModel.Property(e => e.ImageLink).IsModified = true;
-                baseModel.Property(e => e.Size).IsModified = true;
-                baseModel.Property(e => e.CategoryId).IsModified = true;
-                baseModel.Property(e => e.NumberInStock).IsModified = true;
-                _context.SaveChanges();
+            //    updatedProduct = _context.Products.FirstOrDefault(x => x.ID == p.ID);
+            //    updatedProduct.Name = p.Name;
+            //    updatedProduct.Price = p.Price;
+            //    updatedProduct.ImageLink = p.ImageLink;
+            //    updatedProduct.Size = p.Size;
+            //    updatedProduct.CategoryId = p.CategoryId;
+            //    updatedProduct.NumberInStock = p.NumberInStock;
+            //    _context.Products.Attach(updatedProduct);
+            //    var baseModel = _context.Entry(updatedProduct);
+            //    baseModel.Property(e => e.Name).IsModified = true;
+            //    baseModel.Property(e => e.Price).IsModified = true;
+            //    baseModel.Property(e => e.ImageLink).IsModified = true;
+            //    baseModel.Property(e => e.Size).IsModified = true;
+            //    baseModel.Property(e => e.CategoryId).IsModified = true;
+            //    baseModel.Property(e => e.NumberInStock).IsModified = true;
+            //    _context.SaveChanges();
 
-                updatedProduct = _context.Products.FirstOrDefault(x => x.ID == (p.ID + 1));
-                updatedProduct.Name = p.Name;
-                updatedProduct.Price = p.Price;
-                updatedProduct.ImageLink = p.ImageLink;
-                updatedProduct.Size = p.Size;
-                updatedProduct.CategoryId = p.CategoryId;
-                updatedProduct.NumberInStock = p.NumberInStock;
-                _context.Products.Attach(updatedProduct);
-                var small = _context.Entry(updatedProduct);
-                small.Property(e => e.Name).IsModified = true;
-                small.Property(e => e.Price).IsModified = true;
-                small.Property(e => e.ImageLink).IsModified = true;
-                small.Property(e => e.Size).IsModified = true;
-                small.Property(e => e.CategoryId).IsModified = true;
-                small.Property(e => e.NumberInStock).IsModified = true;
-                _context.SaveChanges();
+            //    updatedProduct = _context.Products.FirstOrDefault(x => x.ID == (p.ID + 1));
+            //    updatedProduct.Name = p.Name;
+            //    updatedProduct.Price = p.Price;
+            //    updatedProduct.ImageLink = p.ImageLink;
+            //    updatedProduct.Size = p.Size;
+            //    updatedProduct.CategoryId = p.CategoryId;
+            //    updatedProduct.NumberInStock = p.NumberInStock;
+            //    _context.Products.Attach(updatedProduct);
+            //    var small = _context.Entry(updatedProduct);
+            //    small.Property(e => e.Name).IsModified = true;
+            //    small.Property(e => e.Price).IsModified = true;
+            //    small.Property(e => e.ImageLink).IsModified = true;
+            //    small.Property(e => e.Size).IsModified = true;
+            //    small.Property(e => e.CategoryId).IsModified = true;
+            //    small.Property(e => e.NumberInStock).IsModified = true;
+            //    _context.SaveChanges();
 
-                updatedProduct = _context.Products.FirstOrDefault(x => x.ID == (p.ID + 2));
-                updatedProduct.Name = p.Name;
-                updatedProduct.Price = p.Price;
-                updatedProduct.ImageLink = p.ImageLink;
-                updatedProduct.Size = p.Size;
-                updatedProduct.CategoryId = p.CategoryId;
-                updatedProduct.NumberInStock = p.NumberInStock;
-                _context.Products.Attach(updatedProduct);
-                var medium = _context.Entry(updatedProduct);
-                medium.Property(e => e.Name).IsModified = true;
-                medium.Property(e => e.Price).IsModified = true;
-                medium.Property(e => e.ImageLink).IsModified = true;
-                medium.Property(e => e.Size).IsModified = true;
-                medium.Property(e => e.CategoryId).IsModified = true;
-                medium.Property(e => e.NumberInStock).IsModified = true;
-                _context.SaveChanges();
+            //    updatedProduct = _context.Products.FirstOrDefault(x => x.ID == (p.ID + 2));
+            //    updatedProduct.Name = p.Name;
+            //    updatedProduct.Price = p.Price;
+            //    updatedProduct.ImageLink = p.ImageLink;
+            //    updatedProduct.Size = p.Size;
+            //    updatedProduct.CategoryId = p.CategoryId;
+            //    updatedProduct.NumberInStock = p.NumberInStock;
+            //    _context.Products.Attach(updatedProduct);
+            //    var medium = _context.Entry(updatedProduct);
+            //    medium.Property(e => e.Name).IsModified = true;
+            //    medium.Property(e => e.Price).IsModified = true;
+            //    medium.Property(e => e.ImageLink).IsModified = true;
+            //    medium.Property(e => e.Size).IsModified = true;
+            //    medium.Property(e => e.CategoryId).IsModified = true;
+            //    medium.Property(e => e.NumberInStock).IsModified = true;
+            //    _context.SaveChanges();
 
-                updatedProduct = _context.Products.First(x => x.ID == (p.ID + 3));
-                updatedProduct.Name = p.Name;
-                updatedProduct.Price = p.Price;
-                updatedProduct.ImageLink = p.ImageLink;
-                updatedProduct.Size = p.Size;
-                updatedProduct.CategoryId = p.CategoryId;
-                updatedProduct.NumberInStock = p.NumberInStock;
-                _context.Products.Attach(updatedProduct);
-                var large = _context.Entry(updatedProduct);
-                large.Property(e => e.Name).IsModified = true;
-                large.Property(e => e.Price).IsModified = true;
-                large.Property(e => e.ImageLink).IsModified = true;
-                large.Property(e => e.Size).IsModified = true;
-                large.Property(e => e.CategoryId).IsModified = true;
-                large.Property(e => e.NumberInStock).IsModified = true;
-                _context.SaveChanges();
+            //    updatedProduct = _context.Products.First(x => x.ID == (p.ID + 3));
+            //    updatedProduct.Name = p.Name;
+            //    updatedProduct.Price = p.Price;
+            //    updatedProduct.ImageLink = p.ImageLink;
+            //    updatedProduct.Size = p.Size;
+            //    updatedProduct.CategoryId = p.CategoryId;
+            //    updatedProduct.NumberInStock = p.NumberInStock;
+            //    _context.Products.Attach(updatedProduct);
+            //    var large = _context.Entry(updatedProduct);
+            //    large.Property(e => e.Name).IsModified = true;
+            //    large.Property(e => e.Price).IsModified = true;
+            //    large.Property(e => e.ImageLink).IsModified = true;
+            //    large.Property(e => e.Size).IsModified = true;
+            //    large.Property(e => e.CategoryId).IsModified = true;
+            //    large.Property(e => e.NumberInStock).IsModified = true;
+            //    _context.SaveChanges();
 
-                updatedProduct = _context.Products.FirstOrDefault(x => x.ID == (p.ID + 4));
-                updatedProduct.Name = p.Name;
-                updatedProduct.Price = p.Price;
-                updatedProduct.ImageLink = p.ImageLink;
-                updatedProduct.Size = p.Size;
-                updatedProduct.CategoryId = p.CategoryId;
-                updatedProduct.NumberInStock = p.NumberInStock;
-                _context.Products.Attach(updatedProduct);
-                var xlarge = _context.Entry(updatedProduct);
-                xlarge.Property(e => e.Name).IsModified = true;
-                xlarge.Property(e => e.Price).IsModified = true;
-                xlarge.Property(e => e.ImageLink).IsModified = true;
-                xlarge.Property(e => e.Size).IsModified = true;
-                xlarge.Property(e => e.CategoryId).IsModified = true;
-                xlarge.Property(e => e.NumberInStock).IsModified = true;
-                _context.SaveChanges();
+            //    updatedProduct = _context.Products.FirstOrDefault(x => x.ID == (p.ID + 4));
+            //    updatedProduct.Name = p.Name;
+            //    updatedProduct.Price = p.Price;
+            //    updatedProduct.ImageLink = p.ImageLink;
+            //    updatedProduct.Size = p.Size;
+            //    updatedProduct.CategoryId = p.CategoryId;
+            //    updatedProduct.NumberInStock = p.NumberInStock;
+            //    _context.Products.Attach(updatedProduct);
+            //    var xlarge = _context.Entry(updatedProduct);
+            //    xlarge.Property(e => e.Name).IsModified = true;
+            //    xlarge.Property(e => e.Price).IsModified = true;
+            //    xlarge.Property(e => e.ImageLink).IsModified = true;
+            //    xlarge.Property(e => e.Size).IsModified = true;
+            //    xlarge.Property(e => e.CategoryId).IsModified = true;
+            //    xlarge.Property(e => e.NumberInStock).IsModified = true;
+            //    _context.SaveChanges();
 
 
-            }
+            //}
 
             return RedirectToAction("Index", "Products");
         }
@@ -289,7 +290,7 @@ namespace Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddNewProduct(Product p)
+        public ActionResult AddNewProduct(Product p, HttpPostedFileBase image)
         {
             if (!ModelState.IsValid)
             {
@@ -297,7 +298,6 @@ namespace Website.Controllers
                 {
                     Name = p.Name,
                     Price = p.Price,
-                    ImageLink = p.ImageLink,
                     CategoryId = p.CategoryId,
                     NumberInStock = p.NumberInStock,
                 };
@@ -306,6 +306,13 @@ namespace Website.Controllers
             }
             else
             {
+                if (image != null)
+                {
+                    p.ImageMimeType = image.ContentType;
+                    p.ImageUploadBytes = new byte[image.ContentLength];
+                    image.InputStream.Read(p.ImageUploadBytes, 0, image.ContentLength);
+                }
+
                 int numberInStock = p.NumberInStock;
 
                 p.NumberInStock = 0;
@@ -411,7 +418,7 @@ namespace Website.Controllers
         public ActionResult ItemSizeReport()
         {
             var orders = _context.Order.ToList();
-            List<SizeReport> itemList = new List<SizeReport>();
+            List<Report> itemList = new List<Report>();
 
             foreach (var order in orders)
             {
@@ -428,7 +435,7 @@ namespace Website.Controllers
                         Product p = new Product();
                         p = _context.Products.FirstOrDefault(x => x.ID == ID);
 
-                        SizeReport sr = new SizeReport();
+                        Report sr = new Report();
                         sr.Size = p.Size;
                         sr.Quantity = quantity;
                         sr.NumberInStock = p.NumberInStock;
@@ -450,7 +457,7 @@ namespace Website.Controllers
             int numOrderedXLarge = 0;
             int totalStockXLarge = 0;
 
-            List<SizeReport> sizeDetails = new List<SizeReport>();
+            List<Report> sizeDetails = new List<Report>();
 
 
 
@@ -460,48 +467,67 @@ namespace Website.Controllers
                 {
                     case "Small":
                         numOrderedSmall += item.Quantity; //Stock ordered
-                        totalStockSmall += item.NumberInStock;
                         break;
                     case "Medium":
                         numOrderedMedium += item.Quantity; //Stock ordered
-                        totalStockMedium += item.NumberInStock;
                         break;
                     case "Large":
                         numOrderedLarge += item.Quantity; //Stock ordered
-                        totalStockLarge += item.NumberInStock;
                         break;
                     case "Extra Large":
                         numOrderedXLarge += item.Quantity; //Stock ordered
-                        totalStockXLarge += item.NumberInStock;
                         break;
                 }
             }
 
-            SizeReport smallDetails = new SizeReport();
+            Report smallDetails = new Report();
             smallDetails.Size = "Small";
             smallDetails.TotalQuantitySold = numOrderedSmall;
-            smallDetails.TotalQuantityInStock = totalStockSmall;
-            sizeDetails.Add(smallDetails);
 
-            SizeReport mediumDetails = new SizeReport();
+            Report mediumDetails = new Report();
             mediumDetails.Size = "Medium";
             mediumDetails.TotalQuantitySold = numOrderedMedium;
-            mediumDetails.TotalQuantityInStock = totalStockMedium;
-            sizeDetails.Add(mediumDetails);
 
-            SizeReport largeDetails = new SizeReport();
+            Report largeDetails = new Report();
             largeDetails.Size = "Large";
             largeDetails.TotalQuantitySold = numOrderedLarge;
-            largeDetails.TotalQuantityInStock = totalStockLarge;
-            sizeDetails.Add(largeDetails);
 
-            SizeReport xlargeDetails = new SizeReport();
+            Report xlargeDetails = new Report();
             xlargeDetails.Size = "Extra Large";
             xlargeDetails.TotalQuantitySold = numOrderedXLarge;
+
+            var products = _context.Products.ToList();
+
+            foreach (var product in products)
+            {
+                switch (product.Size)
+                {
+                    case "Small":
+                        totalStockSmall += product.NumberInStock;
+                        break;
+                    case "Medium":
+                        totalStockMedium += product.NumberInStock;
+                        break;
+                    case "Large":
+                        totalStockLarge += product.NumberInStock;
+                        break;
+                    case "Extra Large":
+                        totalStockXLarge += product.NumberInStock;
+                        break;
+                }
+            }
+            smallDetails.TotalQuantityInStock = totalStockSmall;
+            mediumDetails.TotalQuantityInStock = totalStockMedium;
+            largeDetails.TotalQuantityInStock = totalStockLarge;
             xlargeDetails.TotalQuantityInStock = totalStockXLarge;
+
+            sizeDetails.Add(smallDetails);
+            sizeDetails.Add(mediumDetails);
+            sizeDetails.Add(largeDetails);
             sizeDetails.Add(xlargeDetails);
 
-            var viewModel = new SizeReportViewModel
+
+            var viewModel = new ReportViewModel
             {
                 SizeReportList = sizeDetails,
             };
@@ -513,16 +539,25 @@ namespace Website.Controllers
         public ActionResult YearlyRevenueReport()
         {
             var orders = _context.Order.ToList();
-            List<Product> itemList = new List<Product>();
+            List<Report> yearRevList = new List<Report>();
+            int currentYear = 0;
+            int previousYear = 0;
+            decimal totalRev = 0;
 
-            foreach (var order in orders)
+            for (int x = 0; x < orders.Count(); x++)
             {
-                if (order.OrderTime.Year != DateTime.Now.Year)
-                {
+                currentYear = orders[x].OrderTime.Year;
 
+                if (x != 0 && orders[x].OrderTime.Year != previousYear)
+                {
+                    Report s = new Report();
+                    s.Year = previousYear;
+                    s.TotalRevenue = totalRev;
+                    yearRevList.Add(s);
+                    totalRev = 0;
                 }
 
-                string[] items = order.ItemsOrdered.Split(',');
+                string[] items = orders[x].ItemsOrdered.Split(',');
 
                 for (int i = 0; i < items.Count(); i++)
                 {
@@ -533,22 +568,147 @@ namespace Website.Controllers
                         int quantity = int.Parse(detailSplit[1]);
 
                         Product p = new Product();
-                        p = _context.Products.FirstOrDefault(x => x.ID == ID);
+                        p = _context.Products.FirstOrDefault(c => c.ID == ID);
+                        totalRev += (p.Price * quantity);
                     }
                     catch
                     {
                         //
                     }
                 }
+                previousYear = orders[x].OrderTime.Year;
+
+                if (orders.Count() == (x + 1))
+                {
+                    Report s = new Report();
+                    s.Year = currentYear;
+                    s.TotalRevenue = totalRev;
+                    yearRevList.Add(s);
+                }
             }
+
+            var viewModel = new ReportViewModel
+            {
+                SizeReportList = yearRevList,
+            };
+
+            return View("YearlyRevenueReport", viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult CategoryRevenueReport()
+        {
+            //var orders = _context.Order.ToList();
+            //List<SizeReport> yearRevList = new List<SizeReport>();
+            //int currentYear = 0;
+            //int previousYear = 0;
+            //decimal totalRev = 0;
+            //bool multiYear = false;
+
+            //for (int x = 0; x < orders.Count(); x++)
+            //{
+            //    currentYear = orders[x].OrderTime.Year;
+
+            //    if (x != 0 && orders[x].OrderTime.Year != previousYear)
+            //    {
+            //        SizeReport s = new SizeReport();
+            //        s.Year = previousYear;
+            //        s.TotalRevenue = totalRev;
+            //        yearRevList.Add(s);
+            //        totalRev = 0;
+            //        multiYear = true;
+            //    }
+
+            //    string[] items = orders[x].ItemsOrdered.Split(',');
+
+            //    for (int i = 0; i < items.Count(); i++)
+            //    {
+            //        try
+            //        {
+            //            string[] detailSplit = items[i].Split('x');
+            //            int ID = int.Parse(detailSplit[0]);
+            //            int quantity = int.Parse(detailSplit[1]);
+
+            //            Product p = new Product();
+            //            p = _context.Products.FirstOrDefault(c => c.ID == ID);
+            //            totalRev += (p.Price * quantity);
+            //        }
+            //        catch
+            //        {
+            //            //
+            //        }
+            //    }
+            //    previousYear = orders[x].OrderTime.Year;
+
+            //    if (orders.Count() == (x + 1))
+            //    {
+            //        SizeReport s = new SizeReport();
+            //        s.Year = currentYear;
+            //        s.TotalRevenue = totalRev;
+            //        yearRevList.Add(s);
+            //    }
+            //}
 
             //var viewModel = new SizeReportViewModel
             //{
-            //    SizeReportList = sizeDetails,
+            //    SizeReportList = yearRevList,
             //};
 
-            return View("YearlyRevenueReport"/*, viewModel*/);
+            return View("CategoryRevenueReport"/*, viewModel*/);
         }
 
+        //public ActionResult AddImage()
+        //{
+        //    Product p = new Product();
+        //    p.Name = "ImageFill";
+        //    p.Price = 1;
+        //    p.Size = "test";
+        //    p.CategoryId = 1;
+        //    p.NumberInStock = 0;
+        //    p.Viewable = false;
+        //    p.ParentID = 0;
+
+
+        //    return View();
+        //}
+
+        [HttpPost]
+        public ActionResult AddImage(Product model, HttpPostedFileBase image)
+        {
+            model.Name = "ImageFill";
+            model.Price = 1;
+            model.Size = "test";
+            model.CategoryId = 1;
+            model.NumberInStock = 0;
+            model.Viewable = false;
+            model.ParentID = 0;
+
+            if (image != null)
+            {
+                model.ImageMimeType = image.ContentType;
+                model.ImageUploadBytes = new byte[image.ContentLength];
+                image.InputStream.Read(model.ImageUploadBytes, 0, image.ContentLength);
+            }
+            _context.Products.Add(model);
+            _context.SaveChanges();
+
+
+            return View(model);
+        }
+
+        public FileContentResult GetImage(int id)
+        {
+            Product p = new Product();
+            p = _context.Products.FirstOrDefault(x => x.ID == id);
+
+            if (p.ImageUploadBytes != null)
+            {
+                return File(p.ImageUploadBytes, p.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
