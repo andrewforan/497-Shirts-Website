@@ -375,14 +375,6 @@
     <Compile Include="Migrations\201804191739142_UpdateProductModel10.Designer.cs">
       <DependentUpon>201804191739142_UpdateProductModel10.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804191806470_UpdateProductModel11.cs" />
-    <Compile Include="Migrations\201804191806470_UpdateProductModel11.Designer.cs">
-      <DependentUpon>201804191806470_UpdateProductModel11.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804191812237_UpdateProductModel12.cs" />
-    <Compile Include="Migrations\201804191812237_UpdateProductModel12.Designer.cs">
-      <DependentUpon>201804191812237_UpdateProductModel12.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -612,12 +604,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804191739142_UpdateProductModel10.resx">
       <DependentUpon>201804191739142_UpdateProductModel10.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804191806470_UpdateProductModel11.resx">
-      <DependentUpon>201804191806470_UpdateProductModel11.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804191812237_UpdateProductModel12.resx">
-      <DependentUpon>201804191812237_UpdateProductModel12.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

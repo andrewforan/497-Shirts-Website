@@ -171,114 +171,168 @@ namespace Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveEditedProduct(Product p)
+        public ActionResult SaveEditedProduct(Product p, HttpPostedFileBase image)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    var view = new Product()
-            //    {
-            //        ID = p.ID,
-            //        Name = p.Name,
-            //        Price = p.Price,
-            //        ImageLink = p.ImageLink,
-            //        Size = p.Size,
-            //        CategoryId = p.CategoryId,
-            //        NumberInStock = p.NumberInStock,
-            //    };
+            if (!ModelState.IsValid)
+            {
+                var view = new Product()
+                {
+                    ID = p.ID,
+                    Name = p.Name,
+                    Price = p.Price,
+                    CategoryId = p.CategoryId,
+                    NumberInStock = p.NumberInStock,
+                };
 
-            //    return View("EditProduct", view);
-            //}
-            //else
-            //{
-            //    Product updatedProduct = new Product();
+                return View("EditProduct", view);
+            }
+            else
+            {
+                if (image != null)
+                {
+                    p.ImageMimeType = image.ContentType;
+                    p.ImageUploadBytes = new byte[image.ContentLength];
+                    image.InputStream.Read(p.ImageUploadBytes, 0, image.ContentLength);
+                }
 
-            //    updatedProduct = _context.Products.FirstOrDefault(x => x.ID == p.ID);
-            //    updatedProduct.Name = p.Name;
-            //    updatedProduct.Price = p.Price;
-            //    updatedProduct.ImageLink = p.ImageLink;
-            //    updatedProduct.Size = p.Size;
-            //    updatedProduct.CategoryId = p.CategoryId;
-            //    updatedProduct.NumberInStock = p.NumberInStock;
-            //    _context.Products.Attach(updatedProduct);
-            //    var baseModel = _context.Entry(updatedProduct);
-            //    baseModel.Property(e => e.Name).IsModified = true;
-            //    baseModel.Property(e => e.Price).IsModified = true;
-            //    baseModel.Property(e => e.ImageLink).IsModified = true;
-            //    baseModel.Property(e => e.Size).IsModified = true;
-            //    baseModel.Property(e => e.CategoryId).IsModified = true;
-            //    baseModel.Property(e => e.NumberInStock).IsModified = true;
-            //    _context.SaveChanges();
+                Product updatedProduct = new Product();
 
-            //    updatedProduct = _context.Products.FirstOrDefault(x => x.ID == (p.ID + 1));
-            //    updatedProduct.Name = p.Name;
-            //    updatedProduct.Price = p.Price;
-            //    updatedProduct.ImageLink = p.ImageLink;
-            //    updatedProduct.Size = p.Size;
-            //    updatedProduct.CategoryId = p.CategoryId;
-            //    updatedProduct.NumberInStock = p.NumberInStock;
-            //    _context.Products.Attach(updatedProduct);
-            //    var small = _context.Entry(updatedProduct);
-            //    small.Property(e => e.Name).IsModified = true;
-            //    small.Property(e => e.Price).IsModified = true;
-            //    small.Property(e => e.ImageLink).IsModified = true;
-            //    small.Property(e => e.Size).IsModified = true;
-            //    small.Property(e => e.CategoryId).IsModified = true;
-            //    small.Property(e => e.NumberInStock).IsModified = true;
-            //    _context.SaveChanges();
+                updatedProduct = _context.Products.FirstOrDefault(x => x.ID == p.ID);
+                updatedProduct.Name = p.Name;
+                updatedProduct.Price = p.Price;
+                updatedProduct.ImageUploadBytes = p.ImageUploadBytes;
+                updatedProduct.ImageMimeType = p.ImageMimeType;
+                updatedProduct.Size = p.Size;
+                updatedProduct.CategoryId = p.CategoryId;
+                updatedProduct.NumberInStock = 0;
+                _context.Products.Attach(updatedProduct);
+                var baseModel = _context.Entry(updatedProduct);
+                baseModel.Property(e => e.Name).IsModified = true;
+                baseModel.Property(e => e.Price).IsModified = true;
 
-            //    updatedProduct = _context.Products.FirstOrDefault(x => x.ID == (p.ID + 2));
-            //    updatedProduct.Name = p.Name;
-            //    updatedProduct.Price = p.Price;
-            //    updatedProduct.ImageLink = p.ImageLink;
-            //    updatedProduct.Size = p.Size;
-            //    updatedProduct.CategoryId = p.CategoryId;
-            //    updatedProduct.NumberInStock = p.NumberInStock;
-            //    _context.Products.Attach(updatedProduct);
-            //    var medium = _context.Entry(updatedProduct);
-            //    medium.Property(e => e.Name).IsModified = true;
-            //    medium.Property(e => e.Price).IsModified = true;
-            //    medium.Property(e => e.ImageLink).IsModified = true;
-            //    medium.Property(e => e.Size).IsModified = true;
-            //    medium.Property(e => e.CategoryId).IsModified = true;
-            //    medium.Property(e => e.NumberInStock).IsModified = true;
-            //    _context.SaveChanges();
+                if (image != null)
+                {
+                    baseModel.Property(e => e.ImageUploadBytes).IsModified = true;
+                    baseModel.Property(e => e.ImageMimeType).IsModified = true;
+                }
 
-            //    updatedProduct = _context.Products.First(x => x.ID == (p.ID + 3));
-            //    updatedProduct.Name = p.Name;
-            //    updatedProduct.Price = p.Price;
-            //    updatedProduct.ImageLink = p.ImageLink;
-            //    updatedProduct.Size = p.Size;
-            //    updatedProduct.CategoryId = p.CategoryId;
-            //    updatedProduct.NumberInStock = p.NumberInStock;
-            //    _context.Products.Attach(updatedProduct);
-            //    var large = _context.Entry(updatedProduct);
-            //    large.Property(e => e.Name).IsModified = true;
-            //    large.Property(e => e.Price).IsModified = true;
-            //    large.Property(e => e.ImageLink).IsModified = true;
-            //    large.Property(e => e.Size).IsModified = true;
-            //    large.Property(e => e.CategoryId).IsModified = true;
-            //    large.Property(e => e.NumberInStock).IsModified = true;
-            //    _context.SaveChanges();
+                baseModel.Property(e => e.CategoryId).IsModified = true;
+                baseModel.Property(e => e.NumberInStock).IsModified = true;
+                _context.SaveChanges();
 
-            //    updatedProduct = _context.Products.FirstOrDefault(x => x.ID == (p.ID + 4));
-            //    updatedProduct.Name = p.Name;
-            //    updatedProduct.Price = p.Price;
-            //    updatedProduct.ImageLink = p.ImageLink;
-            //    updatedProduct.Size = p.Size;
-            //    updatedProduct.CategoryId = p.CategoryId;
-            //    updatedProduct.NumberInStock = p.NumberInStock;
-            //    _context.Products.Attach(updatedProduct);
-            //    var xlarge = _context.Entry(updatedProduct);
-            //    xlarge.Property(e => e.Name).IsModified = true;
-            //    xlarge.Property(e => e.Price).IsModified = true;
-            //    xlarge.Property(e => e.ImageLink).IsModified = true;
-            //    xlarge.Property(e => e.Size).IsModified = true;
-            //    xlarge.Property(e => e.CategoryId).IsModified = true;
-            //    xlarge.Property(e => e.NumberInStock).IsModified = true;
-            //    _context.SaveChanges();
+                updatedProduct = _context.Products.FirstOrDefault(x => x.ID == (p.ID + 1));
+                updatedProduct.Name = p.Name;
+                updatedProduct.Price = p.Price;
+                updatedProduct.ImageUploadBytes = p.ImageUploadBytes;
+                updatedProduct.ImageMimeType = p.ImageMimeType;
+                updatedProduct.CategoryId = p.CategoryId;
+                updatedProduct.NumberInStock = p.NumberInStock;
+                _context.Products.Attach(updatedProduct);
+                var small = _context.Entry(updatedProduct);
+                small.Property(e => e.Name).IsModified = true;
+                small.Property(e => e.Price).IsModified = true;
+
+                if (image != null)
+                {
+                    small.Property(e => e.ImageUploadBytes).IsModified = true;
+                    small.Property(e => e.ImageMimeType).IsModified = true;
+                }
+
+                small.Property(e => e.CategoryId).IsModified = true;
+
+                if (p.NumberInStock != 0)
+                {
+                    small.Property(e => e.NumberInStock).IsModified = true;
+                }
+
+                _context.SaveChanges();
+
+                updatedProduct = _context.Products.FirstOrDefault(x => x.ID == (p.ID + 2));
+                updatedProduct.Name = p.Name;
+                updatedProduct.Price = p.Price;
+                updatedProduct.ImageUploadBytes = p.ImageUploadBytes;
+                updatedProduct.ImageMimeType = p.ImageMimeType;
+                updatedProduct.Size = p.Size;
+                updatedProduct.CategoryId = p.CategoryId;
+                updatedProduct.NumberInStock = p.NumberInStock;
+                _context.Products.Attach(updatedProduct);
+                var medium = _context.Entry(updatedProduct);
+                medium.Property(e => e.Name).IsModified = true;
+                medium.Property(e => e.Price).IsModified = true;
+
+                if (image != null)
+                {
+                    medium.Property(e => e.ImageUploadBytes).IsModified = true;
+                    medium.Property(e => e.ImageMimeType).IsModified = true;
+                }
+
+                medium.Property(e => e.CategoryId).IsModified = true;
+
+                if (p.NumberInStock != 0)
+                {
+                    medium.Property(e => e.NumberInStock).IsModified = true;
+                }
+
+                _context.SaveChanges();
+
+                updatedProduct = _context.Products.First(x => x.ID == (p.ID + 3));
+                updatedProduct.Name = p.Name;
+                updatedProduct.Price = p.Price;
+                updatedProduct.ImageUploadBytes = p.ImageUploadBytes;
+                updatedProduct.ImageMimeType = p.ImageMimeType;
+                updatedProduct.Size = p.Size;
+                updatedProduct.CategoryId = p.CategoryId;
+                updatedProduct.NumberInStock = p.NumberInStock;
+                _context.Products.Attach(updatedProduct);
+                var large = _context.Entry(updatedProduct);
+                large.Property(e => e.Name).IsModified = true;
+                large.Property(e => e.Price).IsModified = true;
+
+                if (image != null)
+                {
+                    large.Property(e => e.ImageUploadBytes).IsModified = true;
+                    large.Property(e => e.ImageMimeType).IsModified = true;
+                }
+
+                large.Property(e => e.CategoryId).IsModified = true;
+
+                if (p.NumberInStock != 0)
+                {
+                    large.Property(e => e.NumberInStock).IsModified = true;
+                }
+
+                _context.SaveChanges();
+
+                updatedProduct = _context.Products.FirstOrDefault(x => x.ID == (p.ID + 4));
+                updatedProduct.Name = p.Name;
+                updatedProduct.Price = p.Price;
+                updatedProduct.ImageUploadBytes = p.ImageUploadBytes;
+                updatedProduct.ImageMimeType = p.ImageMimeType;
+                updatedProduct.Size = p.Size;
+                updatedProduct.CategoryId = p.CategoryId;
+                updatedProduct.NumberInStock = p.NumberInStock;
+                _context.Products.Attach(updatedProduct);
+                var xlarge = _context.Entry(updatedProduct);
+                xlarge.Property(e => e.Name).IsModified = true;
+                xlarge.Property(e => e.Price).IsModified = true;
+
+                if (image != null)
+                {
+                    xlarge.Property(e => e.ImageUploadBytes).IsModified = true;
+                    xlarge.Property(e => e.ImageMimeType).IsModified = true;
+                }
+
+                xlarge.Property(e => e.CategoryId).IsModified = true;
+
+                if (p.NumberInStock != 0)
+                {
+                    xlarge.Property(e => e.NumberInStock).IsModified = true;
+                }
+
+                _context.SaveChanges();
 
 
-            //}
+            }
 
             return RedirectToAction("Index", "Products");
         }
