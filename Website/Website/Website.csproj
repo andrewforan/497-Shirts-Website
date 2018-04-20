@@ -465,7 +465,6 @@
     <Content Include="Views\Products\ItemRevenueReport.cshtml" />
     <Content Include="Views\Products\ItemSizeReport.cshtml" />
     <Content Include="Views\Products\YearlyRevenueReport.cshtml" />
-    <Content Include="Views\Products\AddImage.cshtml" />
     <Content Include="Views\Products\CategoryRevenueReport.cshtml" />
   </ItemGroup>
   <ItemGroup>

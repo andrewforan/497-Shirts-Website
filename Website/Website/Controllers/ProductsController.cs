@@ -716,21 +716,6 @@ namespace Website.Controllers
             return View("CategoryRevenueReport"/*, viewModel*/);
         }
 
-        //public ActionResult AddImage()
-        //{
-        //    Product p = new Product();
-        //    p.Name = "ImageFill";
-        //    p.Price = 1;
-        //    p.Size = "test";
-        //    p.CategoryId = 1;
-        //    p.NumberInStock = 0;
-        //    p.Viewable = false;
-        //    p.ParentID = 0;
-
-
-        //    return View();
-        //}
-
         [HttpPost]
         public ActionResult AddImage(Product model, HttpPostedFileBase image)
         {
@@ -755,6 +740,7 @@ namespace Website.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         public FileContentResult GetImage(int id)
         {
             Product p = new Product();
