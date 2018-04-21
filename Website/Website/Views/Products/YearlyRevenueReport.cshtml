@@ -9,26 +9,35 @@
 
 <br />
 
-<div id="skills">
-    <table class="table table-bordered table-hover table-light">
-        <thead class="thead-dark">
-            <tr>
-                <th>Year</th>
-                <th>Total Revenue</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach (var row in Model.ReportList)
-            {
+@if (Model.ReportList.Count == 0)
+{
+    <div class="alert alert-danger">
+        <strong>Unable to generate report:</strong> No orders have been placed.
+    </div>
+}
+else
+{
+    <div id="skills">
+        <table class="table table-bordered table-hover table-light">
+            <thead class="thead-dark">
                 <tr>
-                    <th scope="row">@row.Year</th>
-                    <td>$@row.TotalRevenue</td>
+                    <th>Year</th>
+                    <th>Total Revenue</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+
+                @foreach (var row in Model.ReportList)
+                {
+                    <tr>
+                        <th scope="row">@row.Year</th>
+                        <td>$@row.TotalRevenue</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
 
 @using (Html.BeginForm("Reports", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {

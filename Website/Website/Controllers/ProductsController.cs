@@ -410,59 +410,61 @@ namespace Website.Controllers
         {
             var orders = _context.Order.ToList();
             List<Report> itemOrderedList = new List<Report>();
-
-            for (int x = 0; x < orders.Count(); x++)
-            {
-                string[] items = orders[x].ItemsOrdered.Split(',');
-
-                for (int i = 0; i < items.Count(); i++)
-                {
-                    try
-                    {
-                        string[] detailSplit = items[i].Split('x');
-                        int ID = int.Parse(detailSplit[0]);
-                        int quantity = int.Parse(detailSplit[1]);
-
-                        Product p = new Product();
-                        p = _context.Products.FirstOrDefault(c => c.ID == ID);
-
-                        Report r = new Report();
-                        r.ID = p.ParentID;
-                        r.ItemName = p.Name;
-                        r.Price = p.Price;
-                        r.Quantity = quantity;
-                        itemOrderedList.Add(r);
-                    }
-                    catch
-                    {
-                        //
-                    }
-                }
-            }
-
             List<Report> combinedItemList = new List<Report>();
 
-            for (int x = 0; x < itemOrderedList.Count(); x++)
+            if (orders.Count() > 0)
             {
-                int quantity = 0;
-
-                for (int y = 0; y < itemOrderedList.Count(); y++)
+                for (int x = 0; x < orders.Count(); x++)
                 {
-                    if (itemOrderedList[x].ID == itemOrderedList[y].ID)
+                    string[] items = orders[x].ItemsOrdered.Split(',');
+
+                    for (int i = 0; i < items.Count(); i++)
                     {
-                        quantity += itemOrderedList[y].Quantity;
+                        try
+                        {
+                            string[] detailSplit = items[i].Split('x');
+                            int ID = int.Parse(detailSplit[0]);
+                            int quantity = int.Parse(detailSplit[1]);
+
+                            Product p = new Product();
+                            p = _context.Products.FirstOrDefault(c => c.ID == ID);
+
+                            Report r = new Report();
+                            r.ID = p.ParentID;
+                            r.ItemName = p.Name;
+                            r.Price = p.Price;
+                            r.Quantity = quantity;
+                            itemOrderedList.Add(r);
+                        }
+                        catch
+                        {
+                            //
+                        }
                     }
                 }
-                Report item = new Report();
-                item.ID = itemOrderedList[x].ID;
-                item.ItemName = itemOrderedList[x].ItemName;
-                item.Price = itemOrderedList[x].Price;
-                item.Quantity = quantity;
-                combinedItemList.Add(item);
-            }
 
-            combinedItemList = combinedItemList.GroupBy(x => x.ID).Select(x => x.FirstOrDefault()).ToList(); //remove duplicates
-            combinedItemList = combinedItemList.OrderByDescending(x => x.NumberInStock).ToList(); // sort by highest quantity sold
+                for (int x = 0; x < itemOrderedList.Count(); x++)
+                {
+                    int quantity = 0;
+
+                    for (int y = 0; y < itemOrderedList.Count(); y++)
+                    {
+                        if (itemOrderedList[x].ID == itemOrderedList[y].ID)
+                        {
+                            quantity += itemOrderedList[y].Quantity;
+                        }
+                    }
+                    Report item = new Report();
+                    item.ID = itemOrderedList[x].ID;
+                    item.ItemName = itemOrderedList[x].ItemName;
+                    item.Price = itemOrderedList[x].Price;
+                    item.Quantity = quantity;
+                    combinedItemList.Add(item);
+                }
+
+                combinedItemList = combinedItemList.GroupBy(x => x.ID).Select(x => x.FirstOrDefault()).ToList(); //remove duplicates
+                combinedItemList = combinedItemList.OrderByDescending(x => x.NumberInStock).ToList(); // sort by highest quantity sold
+            }
 
             var viewModel = new OrdersViewModel
             {
@@ -477,112 +479,113 @@ namespace Website.Controllers
         {
             var orders = _context.Order.ToList();
             List<Report> itemList = new List<Report>();
-
-            foreach (var order in orders)
-            {
-                string[] items = order.ItemsOrdered.Split(',');
-
-                for (int i = 0; i < items.Count(); i++)
-                {
-                    try
-                    {
-                        string[] detailSplit = items[i].Split('x');
-                        int ID = int.Parse(detailSplit[0]);
-                        int quantity = int.Parse(detailSplit[1]);
-
-                        Product p = new Product();
-                        p = _context.Products.FirstOrDefault(x => x.ID == ID);
-
-                        Report s = new Report();
-                        s.Size = p.Size;
-                        s.Quantity = quantity;
-                        s.NumberInStock = p.NumberInStock;
-                        itemList.Add(s);
-                    }
-                    catch
-                    {
-                        //
-                    }
-                }
-            }
-
-            int numOrderedSmall = 0;
-            int totalStockSmall = 0;
-            int numOrderedMedium = 0;
-            int totalStockMedium = 0;
-            int numOrderedLarge = 0;
-            int totalStockLarge = 0;
-            int numOrderedXLarge = 0;
-            int totalStockXLarge = 0;
-
             List<Report> sizeDetails = new List<Report>();
 
-
-
-            foreach (var item in itemList)
+            if (orders.Count() > 0)
             {
-                switch (item.Size)
+                foreach (var order in orders)
                 {
-                    case "Small":
-                        numOrderedSmall += item.Quantity; //Stock ordered
-                        break;
-                    case "Medium":
-                        numOrderedMedium += item.Quantity; //Stock ordered
-                        break;
-                    case "Large":
-                        numOrderedLarge += item.Quantity; //Stock ordered
-                        break;
-                    case "Extra Large":
-                        numOrderedXLarge += item.Quantity; //Stock ordered
-                        break;
+                    string[] items = order.ItemsOrdered.Split(',');
+
+                    for (int i = 0; i < items.Count(); i++)
+                    {
+                        try
+                        {
+                            string[] detailSplit = items[i].Split('x');
+                            int ID = int.Parse(detailSplit[0]);
+                            int quantity = int.Parse(detailSplit[1]);
+
+                            Product p = new Product();
+                            p = _context.Products.FirstOrDefault(x => x.ID == ID);
+
+                            Report s = new Report();
+                            s.Size = p.Size;
+                            s.Quantity = quantity;
+                            s.NumberInStock = p.NumberInStock;
+                            itemList.Add(s);
+                        }
+                        catch
+                        {
+                            //
+                        }
+                    }
                 }
-            }
 
-            Report smallDetails = new Report();
-            smallDetails.Size = "Small";
-            smallDetails.TotalQuantitySold = numOrderedSmall;
+                int numOrderedSmall = 0;
+                int totalStockSmall = 0;
+                int numOrderedMedium = 0;
+                int totalStockMedium = 0;
+                int numOrderedLarge = 0;
+                int totalStockLarge = 0;
+                int numOrderedXLarge = 0;
+                int totalStockXLarge = 0;
 
-            Report mediumDetails = new Report();
-            mediumDetails.Size = "Medium";
-            mediumDetails.TotalQuantitySold = numOrderedMedium;
 
-            Report largeDetails = new Report();
-            largeDetails.Size = "Large";
-            largeDetails.TotalQuantitySold = numOrderedLarge;
-
-            Report xlargeDetails = new Report();
-            xlargeDetails.Size = "Extra Large";
-            xlargeDetails.TotalQuantitySold = numOrderedXLarge;
-
-            var products = _context.Products.ToList();
-
-            foreach (var product in products)
-            {
-                switch (product.Size)
+                foreach (var item in itemList)
                 {
-                    case "Small":
-                        totalStockSmall += product.NumberInStock;
-                        break;
-                    case "Medium":
-                        totalStockMedium += product.NumberInStock;
-                        break;
-                    case "Large":
-                        totalStockLarge += product.NumberInStock;
-                        break;
-                    case "Extra Large":
-                        totalStockXLarge += product.NumberInStock;
-                        break;
+                    switch (item.Size)
+                    {
+                        case "Small":
+                            numOrderedSmall += item.Quantity; //Stock ordered
+                            break;
+                        case "Medium":
+                            numOrderedMedium += item.Quantity; //Stock ordered
+                            break;
+                        case "Large":
+                            numOrderedLarge += item.Quantity; //Stock ordered
+                            break;
+                        case "Extra Large":
+                            numOrderedXLarge += item.Quantity; //Stock ordered
+                            break;
+                    }
                 }
-            }
-            smallDetails.TotalQuantityInStock = totalStockSmall;
-            mediumDetails.TotalQuantityInStock = totalStockMedium;
-            largeDetails.TotalQuantityInStock = totalStockLarge;
-            xlargeDetails.TotalQuantityInStock = totalStockXLarge;
 
-            sizeDetails.Add(smallDetails);
-            sizeDetails.Add(mediumDetails);
-            sizeDetails.Add(largeDetails);
-            sizeDetails.Add(xlargeDetails);
+                Report smallDetails = new Report();
+                smallDetails.Size = "Small";
+                smallDetails.TotalQuantitySold = numOrderedSmall;
+
+                Report mediumDetails = new Report();
+                mediumDetails.Size = "Medium";
+                mediumDetails.TotalQuantitySold = numOrderedMedium;
+
+                Report largeDetails = new Report();
+                largeDetails.Size = "Large";
+                largeDetails.TotalQuantitySold = numOrderedLarge;
+
+                Report xlargeDetails = new Report();
+                xlargeDetails.Size = "Extra Large";
+                xlargeDetails.TotalQuantitySold = numOrderedXLarge;
+
+                var products = _context.Products.ToList();
+
+                foreach (var product in products)
+                {
+                    switch (product.Size)
+                    {
+                        case "Small":
+                            totalStockSmall += product.NumberInStock;
+                            break;
+                        case "Medium":
+                            totalStockMedium += product.NumberInStock;
+                            break;
+                        case "Large":
+                            totalStockLarge += product.NumberInStock;
+                            break;
+                        case "Extra Large":
+                            totalStockXLarge += product.NumberInStock;
+                            break;
+                    }
+                }
+                smallDetails.TotalQuantityInStock = totalStockSmall;
+                mediumDetails.TotalQuantityInStock = totalStockMedium;
+                largeDetails.TotalQuantityInStock = totalStockLarge;
+                xlargeDetails.TotalQuantityInStock = totalStockXLarge;
+
+                sizeDetails.Add(smallDetails);
+                sizeDetails.Add(mediumDetails);
+                sizeDetails.Add(largeDetails);
+                sizeDetails.Add(xlargeDetails);
+            }
 
 
             var viewModel = new ReportViewModel
@@ -598,50 +601,54 @@ namespace Website.Controllers
         {
             var orders = _context.Order.ToList();
             List<Report> yearRevList = new List<Report>();
-            int currentYear = 0;
-            int previousYear = 0;
-            decimal totalRev = 0;
-
-            for (int x = 0; x < orders.Count(); x++)
+            
+            if (orders.Count() > 0)
             {
-                currentYear = orders[x].OrderTime.Year;
+                int currentYear = 0;
+                int previousYear = 0;
+                decimal totalRev = 0;
 
-                if (x != 0 && orders[x].OrderTime.Year != previousYear)
+                for (int x = 0; x < orders.Count(); x++)
                 {
-                    Report s = new Report();
-                    s.Year = previousYear;
-                    s.TotalRevenue = totalRev;
-                    yearRevList.Add(s);
-                    totalRev = 0;
-                }
+                    currentYear = orders[x].OrderTime.Year;
 
-                string[] items = orders[x].ItemsOrdered.Split(',');
-
-                for (int i = 0; i < items.Count(); i++)
-                {
-                    try
+                    if (x != 0 && orders[x].OrderTime.Year != previousYear)
                     {
-                        string[] detailSplit = items[i].Split('x');
-                        int ID = int.Parse(detailSplit[0]);
-                        int quantity = int.Parse(detailSplit[1]);
-
-                        Product p = new Product();
-                        p = _context.Products.FirstOrDefault(c => c.ID == ID);
-                        totalRev += (p.Price * quantity);
+                        Report s = new Report();
+                        s.Year = previousYear;
+                        s.TotalRevenue = totalRev;
+                        yearRevList.Add(s);
+                        totalRev = 0;
                     }
-                    catch
+
+                    string[] items = orders[x].ItemsOrdered.Split(',');
+
+                    for (int i = 0; i < items.Count(); i++)
                     {
-                        //
-                    }
-                }
-                previousYear = orders[x].OrderTime.Year;
+                        try
+                        {
+                            string[] detailSplit = items[i].Split('x');
+                            int ID = int.Parse(detailSplit[0]);
+                            int quantity = int.Parse(detailSplit[1]);
 
-                if (orders.Count() == (x + 1))
-                {
-                    Report s = new Report();
-                    s.Year = currentYear;
-                    s.TotalRevenue = totalRev;
-                    yearRevList.Add(s);
+                            Product p = new Product();
+                            p = _context.Products.FirstOrDefault(c => c.ID == ID);
+                            totalRev += (p.Price * quantity);
+                        }
+                        catch
+                        {
+                            //
+                        }
+                    }
+                    previousYear = orders[x].OrderTime.Year;
+
+                    if (orders.Count() == (x + 1))
+                    {
+                        Report s = new Report();
+                        s.Year = currentYear;
+                        s.TotalRevenue = totalRev;
+                        yearRevList.Add(s);
+                    }
                 }
             }
 
@@ -658,109 +665,119 @@ namespace Website.Controllers
         {
             var orders = _context.Order.ToList();
             List<Report> itemList = new List<Report>();
-
-            for (int x = 0; x < orders.Count(); x++)
-            {
-                string[] items = orders[x].ItemsOrdered.Split(',');
-
-                for (int i = 0; i < items.Count(); i++)
-                {
-                    try
-                    {
-                        string[] detailSplit = items[i].Split('x');
-                        int ID = int.Parse(detailSplit[0]);
-                        int quantity = int.Parse(detailSplit[1]);
-
-                        Product p = new Product();
-                        p = _context.Products.FirstOrDefault(c => c.ID == ID);
-
-                        Report r = new Report();
-                        r.ID = p.ParentID;
-                        r.ItemName = p.Name;
-                        r.Price = p.Price;
-                        r.Quantity = quantity;
-                        r.CategoryId = p.CategoryId;
-                        itemList.Add(r);
-                    }
-                    catch
-                    {
-                        //
-                    }
-                }
-            }
-
-
-            List<Report> combinedItemList = new List<Report>();
-
-            for (int x = 0; x < itemList.Count(); x++)
-            {
-                int quantity = 0;
-
-                for (int y = 0; y < itemList.Count(); y++)
-                {
-                    if (itemList[x].ID == itemList[y].ID)
-                    {
-                        quantity += itemList[y].Quantity;
-                    }
-                }
-                Report item = new Report();
-                item.ID = itemList[x].ID;
-                item.ItemName = itemList[x].ItemName;
-                item.Price = itemList[x].Price;
-                item.Quantity = quantity;
-                item.CategoryId = itemList[x].CategoryId;
-                combinedItemList.Add(item);
-            }
-
-            combinedItemList = combinedItemList.GroupBy(x => x.ID).Select(x => x.FirstOrDefault()).ToList(); //remove duplicates
-            combinedItemList = combinedItemList.OrderBy(x => x.CategoryId).ToList(); // sort by category ID
             List<Report> categoryList = new List<Report>();
 
-            int categoryIDCount = 0;
-            int categoryItemCount = 0;
-            int avgCount = 0;
-            decimal totalRevenue = 0;
-
-            for (int i = 0; i < combinedItemList.Count(); i++)
+            if (orders.Count() > 0)
             {
-                Report r = new Report();
-                //r = combinedItemList[i];
-
-                if (combinedItemList[i].CategoryId == categoryIDCount)
+                for (int x = 0; x < orders.Count(); x++)
                 {
-                    avgCount += combinedItemList[i].Quantity;
-                    totalRevenue += (combinedItemList[i].Price * combinedItemList[i].Quantity);
-                    categoryItemCount++;
+                    string[] items = orders[x].ItemsOrdered.Split(',');
 
-                    if (combinedItemList.Count() == (i+1))
+                    for (int i = 0; i < items.Count(); i++)
                     {
-                        r.ID = combinedItemList[i].ID;
-                        r.CategoryId = combinedItemList[i].CategoryId;
+                        try
+                        {
+                            string[] detailSplit = items[i].Split('x');
+                            int ID = int.Parse(detailSplit[0]);
+                            int quantity = int.Parse(detailSplit[1]);
+
+                            Product p = new Product();
+                            p = _context.Products.FirstOrDefault(c => c.ID == ID);
+
+                            Report r = new Report();
+                            r.ID = p.ParentID;
+                            r.ItemName = p.Name;
+                            r.Price = p.Price;
+                            r.Quantity = quantity;
+                            r.CategoryId = p.CategoryId;
+                            itemList.Add(r);
+                        }
+                        catch
+                        {
+                            //
+                        }
+                    }
+                }
+
+
+                List<Report> combinedItemList = new List<Report>();
+
+                for (int x = 0; x < itemList.Count(); x++)
+                {
+                    int quantity = 0;
+
+                    for (int y = 0; y < itemList.Count(); y++)
+                    {
+                        if (itemList[x].ID == itemList[y].ID)
+                        {
+                            quantity += itemList[y].Quantity;
+                        }
+                    }
+                    Report item = new Report();
+                    item.ID = itemList[x].ID;
+                    item.ItemName = itemList[x].ItemName;
+                    item.Price = itemList[x].Price;
+                    item.Quantity = quantity;
+                    item.CategoryId = itemList[x].CategoryId;
+                    combinedItemList.Add(item);
+                }
+
+                combinedItemList = combinedItemList.GroupBy(x => x.ID).Select(x => x.FirstOrDefault()).ToList(); //remove duplicates
+                combinedItemList = combinedItemList.OrderBy(x => x.CategoryId).ToList(); // sort by category ID
+
+                int categoryIDCount = 0;
+                int categoryItemCount = 0;
+                int avgCount = 0;
+                decimal totalRevenue = 0;
+
+                for (int i = 0; i < combinedItemList.Count(); i++)
+                {
+                    Report r = new Report();
+
+                    if (combinedItemList[i].CategoryId == categoryIDCount)
+                    {
+                        avgCount += combinedItemList[i].Quantity;
+                        totalRevenue += (combinedItemList[i].Price * combinedItemList[i].Quantity);
+                        categoryItemCount++;
+
+                        if (combinedItemList.Count() == (i + 1))
+                        {
+                            r.ID = combinedItemList[i].ID;
+                            r.CategoryId = combinedItemList[i].CategoryId;
+                            r.Quantity = avgCount;
+                            r.TotalRevenue = totalRevenue;
+                            r.AvgRevenue = Math.Round((totalRevenue / avgCount), 2);
+                            categoryList.Add(r);
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            r.ID = combinedItemList[i - 1].ID;
+                            r.CategoryId = combinedItemList[i - 1].CategoryId;
+                        }
+                        catch
+                        {
+                            r.ID = combinedItemList[i].ID;
+                            r.CategoryId = combinedItemList[i].CategoryId;
+                        }
+
                         r.Quantity = avgCount;
                         r.TotalRevenue = totalRevenue;
                         r.AvgRevenue = Math.Round((totalRevenue / avgCount), 2);
                         categoryList.Add(r);
+
+                        categoryIDCount++;
+                        categoryItemCount = 0;
+                        avgCount = 0;
+                        totalRevenue = 0;
+                        i--;
                     }
                 }
-                else
-                {
-                    r.ID = combinedItemList[i - 1].ID;
-                    r.CategoryId = combinedItemList[i - 1].CategoryId;
-                    r.Quantity = avgCount;
-                    r.TotalRevenue = totalRevenue;
-                    r.AvgRevenue = Math.Round((totalRevenue / avgCount), 2);
-                    categoryList.Add(r);
-                    
-                    categoryIDCount++;
-                    categoryItemCount = 0;
-                    avgCount = 0;
-                    totalRevenue = 0;
-                    i--;
-                }
+
+                categoryList = categoryList.OrderByDescending(x => x.AvgRevenue).ToList(); // sort by highest avg revenue
             }
-
-            categoryList = categoryList.OrderByDescending(x => x.AvgRevenue).ToList(); // sort by highest avg revenue
-
 
             var viewModel = new ReportViewModel
             {

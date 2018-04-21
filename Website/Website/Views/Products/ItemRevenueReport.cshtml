@@ -11,30 +11,39 @@
 
 @{decimal totalRev = 0;}
 
-<div id="skills">
-    <table class="table table-bordered table-hover table-light">
-        <thead class="thead-dark">
-            <tr>
-                <th>Product</th>
-                <th>Times Sold</th>
-                <th>Total Revenue Gained</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach (var item in Model.productsOrdered)
-            {
-                totalRev = (item.Price * item.Quantity);
+@if (Model.productsOrdered.Count == 0)
+{
+    <div class="alert alert-danger">
+        <strong>Unable to generate report:</strong> No orders have been placed.
+    </div>
+}
+else
+{
+    <div id="skills">
+        <table class="table table-bordered table-hover table-light">
+            <thead class="thead-dark">
                 <tr>
-                    <th scope="row">@item.ItemName</th>
-                    <td>@item.Quantity</td>
-                    <td>$@totalRev</td>
+                    <th>Product</th>
+                    <th>Times Sold</th>
+                    <th>Total Revenue Gained</th>
                 </tr>
-            }
+            </thead>
+            <tbody>
 
-        </tbody>
-    </table>
-</div>
+                @foreach (var item in Model.productsOrdered)
+                {
+                    totalRev = (item.Price * item.Quantity);
+                    <tr>
+                        <th scope="row">@item.ItemName</th>
+                        <td>@item.Quantity</td>
+                        <td>$@totalRev</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+}
 
 @using (Html.BeginForm("Reports", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {

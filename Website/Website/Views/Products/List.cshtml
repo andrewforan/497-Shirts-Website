@@ -31,7 +31,9 @@
 
 @if (Model.Products.Count == 0)
 {
-    <text>No products found.</text>
+    <div class="alert alert-danger">
+        <strong>No products have been added!</strong>
+    </div>
 }
 else
 {
@@ -92,19 +94,19 @@ else
                             <div class="text-center">
                                 <div class="btn btn-link">$@product.Price</div><br />
                                 @Html.DropDownListFor(
-                                                         model => model.Size,
-                                                             new SelectList(
-                                                                 new List<Object>{
-                                                                new { value = "Small" , text = "Small"  },
-                                                                new { value = "Medium" , text = "Medium" },
-                                                                new { value = "Large" , text = "Large" },
-                                                                new { value = "Extra Large" , text = "Extra Large"}
-                                                                     },
-                                                                 "value",
-                                                                 "text",
-                                                                 Model.Size
-                                                                )
-                                                             )<br /><br />
+                                                              model => model.Size,
+                                                                  new SelectList(
+                                                                      new List<Object>{
+                                                                    new { value = "Small" , text = "Small"  },
+                                                                    new { value = "Medium" , text = "Medium" },
+                                                                    new { value = "Large" , text = "Large" },
+                                                                    new { value = "Extra Large" , text = "Extra Large"}
+                                                                          },
+                                                                      "value",
+                                                                      "text",
+                                                                      Model.Size
+                                                                     )
+                                                                  )<br /><br />
                             </div>
                             <div class="pull-right">
 

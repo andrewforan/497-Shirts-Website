@@ -8,18 +8,26 @@
 <h2>Item Revenue Report</h2>
 <br />
 
-<div id="skills">
-    <table class="table table-bordered table-hover table-light">
-        <thead class="thead-dark">
-            <tr>
-                <th>Category</th>
-                <th>Total Items in Category</th>
-                <th>Average Revenue Per Item Sold in Category</th>
-            </tr>
-        </thead>
-        <tbody>
+@if (Model.ReportList.Count == 0)
+{
+    <div class="alert alert-danger">
+        <strong>Unable to generate report:</strong> No orders have been placed.
+    </div>
+}
+else
+{
+    <div id="skills">
+        <table class="table table-bordered table-hover table-light">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Category</th>
+                    <th>Total Items in Category</th>
+                    <th>Average Revenue Per Item Sold in Category</th>
+                </tr>
+            </thead>
+            <tbody>
 
-            @foreach (var item in Model.ReportList)
+                @foreach (var item in Model.ReportList)
                 {
                     <tr>
                         @if (item.CategoryId == 0)
@@ -35,9 +43,10 @@
                     </tr>
                 }
 
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
+}
 
 @using (Html.BeginForm("Reports", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
