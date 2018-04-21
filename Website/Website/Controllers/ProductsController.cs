@@ -729,11 +729,11 @@ namespace Website.Controllers
                 int categoryItemCount = 0;
                 int avgCount = 0;
                 decimal totalRevenue = 0;
+                bool initial = true;
 
                 for (int i = 0; i < combinedItemList.Count(); i++)
                 {
                     Report r = new Report();
-                    bool initial = true;
 
                     if (combinedItemList[i].CategoryId == categoryIDCount)
                     {
@@ -791,30 +791,6 @@ namespace Website.Controllers
 
             return View("CategoryRevenueReport", viewModel);
         }
-
-        //[HttpPost]
-        //public ActionResult AddImage(Product model, HttpPostedFileBase image)
-        //{
-        //    model.Name = "ImageFill";
-        //    model.Price = 1;
-        //    model.Size = "test";
-        //    model.CategoryId = 1;
-        //    model.NumberInStock = 0;
-        //    model.Viewable = false;
-        //    model.ParentID = 0;
-
-        //    if (image != null)
-        //    {
-        //        model.ImageMimeType = image.ContentType;
-        //        model.ImageUploadBytes = new byte[image.ContentLength];
-        //        image.InputStream.Read(model.ImageUploadBytes, 0, image.ContentLength);
-        //    }
-        //    _context.Products.Add(model);
-        //    _context.SaveChanges();
-
-
-        //    return View(model);
-        //}
 
         [AllowAnonymous]
         public FileContentResult GetImage(int id)
