@@ -17,5 +17,7 @@ namespace Website.Models
         public int ID { get; set; }
         public decimal Price { get; set; }
         public string ItemName { get; set; }
+        public int CategoryId { get; set; }
+        public decimal AvgRevenue { get; set; }
     }
 }

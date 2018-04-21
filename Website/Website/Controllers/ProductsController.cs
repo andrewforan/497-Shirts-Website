@@ -54,7 +54,7 @@ namespace Website.Controllers
 
             string currItem = (p.ID + "x" + pv.quantity + ",");
 
-            if (p.NumberInStock >= pv.quantity)
+            if (p.NumberInStock >= pv.quantity && pv.quantity > 0)
             {
                 try
                 {
@@ -132,7 +132,6 @@ namespace Website.Controllers
                 ID = pv.ID,
                 Name = p.Name,
                 Price = p.Price,
-                //ImageLink = p.ImageLink,
                 ImageUploadBytes = p.ImageUploadBytes,
                 Size = p.Size,
                 CategoryId = p.CategoryId,
@@ -588,7 +587,7 @@ namespace Website.Controllers
 
             var viewModel = new ReportViewModel
             {
-                SizeReportList = sizeDetails,
+                ReportList = sizeDetails,
             };
 
             return View("ItemSizeReport", viewModel);
@@ -648,7 +647,7 @@ namespace Website.Controllers
 
             var viewModel = new ReportViewModel
             {
-                SizeReportList = yearRevList,
+                ReportList = yearRevList,
             };
 
             return View("YearlyRevenueReport", viewModel);
@@ -657,88 +656,143 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult CategoryRevenueReport()
         {
-            //var orders = _context.Order.ToList();
-            //List<SizeReport> yearRevList = new List<SizeReport>();
-            //int currentYear = 0;
-            //int previousYear = 0;
-            //decimal totalRev = 0;
-            //bool multiYear = false;
+            var orders = _context.Order.ToList();
+            List<Report> itemList = new List<Report>();
 
-            //for (int x = 0; x < orders.Count(); x++)
-            //{
-            //    currentYear = orders[x].OrderTime.Year;
-
-            //    if (x != 0 && orders[x].OrderTime.Year != previousYear)
-            //    {
-            //        SizeReport s = new SizeReport();
-            //        s.Year = previousYear;
-            //        s.TotalRevenue = totalRev;
-            //        yearRevList.Add(s);
-            //        totalRev = 0;
-            //        multiYear = true;
-            //    }
-
-            //    string[] items = orders[x].ItemsOrdered.Split(',');
-
-            //    for (int i = 0; i < items.Count(); i++)
-            //    {
-            //        try
-            //        {
-            //            string[] detailSplit = items[i].Split('x');
-            //            int ID = int.Parse(detailSplit[0]);
-            //            int quantity = int.Parse(detailSplit[1]);
-
-            //            Product p = new Product();
-            //            p = _context.Products.FirstOrDefault(c => c.ID == ID);
-            //            totalRev += (p.Price * quantity);
-            //        }
-            //        catch
-            //        {
-            //            //
-            //        }
-            //    }
-            //    previousYear = orders[x].OrderTime.Year;
-
-            //    if (orders.Count() == (x + 1))
-            //    {
-            //        SizeReport s = new SizeReport();
-            //        s.Year = currentYear;
-            //        s.TotalRevenue = totalRev;
-            //        yearRevList.Add(s);
-            //    }
-            //}
-
-            //var viewModel = new SizeReportViewModel
-            //{
-            //    SizeReportList = yearRevList,
-            //};
-
-            return View("CategoryRevenueReport"/*, viewModel*/);
-        }
-
-        [HttpPost]
-        public ActionResult AddImage(Product model, HttpPostedFileBase image)
-        {
-            model.Name = "ImageFill";
-            model.Price = 1;
-            model.Size = "test";
-            model.CategoryId = 1;
-            model.NumberInStock = 0;
-            model.Viewable = false;
-            model.ParentID = 0;
-
-            if (image != null)
+            for (int x = 0; x < orders.Count(); x++)
             {
-                model.ImageMimeType = image.ContentType;
-                model.ImageUploadBytes = new byte[image.ContentLength];
-                image.InputStream.Read(model.ImageUploadBytes, 0, image.ContentLength);
+                string[] items = orders[x].ItemsOrdered.Split(',');
+
+                for (int i = 0; i < items.Count(); i++)
+                {
+                    try
+                    {
+                        string[] detailSplit = items[i].Split('x');
+                        int ID = int.Parse(detailSplit[0]);
+                        int quantity = int.Parse(detailSplit[1]);
+
+                        Product p = new Product();
+                        p = _context.Products.FirstOrDefault(c => c.ID == ID);
+
+                        Report r = new Report();
+                        r.ID = p.ParentID;
+                        r.ItemName = p.Name;
+                        r.Price = p.Price;
+                        r.Quantity = quantity;
+                        r.CategoryId = p.CategoryId;
+                        itemList.Add(r);
+                    }
+                    catch
+                    {
+                        //
+                    }
+                }
             }
-            _context.Products.Add(model);
-            _context.SaveChanges();
 
 
-            return View(model);
+            List<Report> combinedItemList = new List<Report>();
+
+            for (int x = 0; x < itemList.Count(); x++)
+            {
+                int quantity = 0;
+
+                for (int y = 0; y < itemList.Count(); y++)
+                {
+                    if (itemList[x].ID == itemList[y].ID)
+                    {
+                        quantity += itemList[y].Quantity;
+                    }
+                }
+                Report item = new Report();
+                item.ID = itemList[x].ID;
+                item.ItemName = itemList[x].ItemName;
+                item.Price = itemList[x].Price;
+                item.Quantity = quantity;
+                item.CategoryId = itemList[x].CategoryId;
+                combinedItemList.Add(item);
+            }
+
+            combinedItemList = combinedItemList.GroupBy(x => x.ID).Select(x => x.FirstOrDefault()).ToList(); //remove duplicates
+            combinedItemList = combinedItemList.OrderBy(x => x.CategoryId).ToList(); // sort by category ID
+            List<Report> categoryList = new List<Report>();
+
+            int categoryIDCount = 0;
+            int categoryItemCount = 0;
+            int avgCount = 0;
+            decimal totalRevenue = 0;
+
+            for (int i = 0; i < combinedItemList.Count(); i++)
+            {
+                Report r = new Report();
+                //r = combinedItemList[i];
+
+                if (combinedItemList[i].CategoryId == categoryIDCount)
+                {
+                    avgCount += combinedItemList[i].Quantity;
+                    totalRevenue += (combinedItemList[i].Price * combinedItemList[i].Quantity);
+                    categoryItemCount++;
+
+                    if (combinedItemList.Count() == (i+1))
+                    {
+                        r.ID = combinedItemList[i].ID;
+                        r.CategoryId = combinedItemList[i].CategoryId;
+                        r.Quantity = avgCount;
+                        r.TotalRevenue = totalRevenue;
+                        r.AvgRevenue = Math.Round((totalRevenue / avgCount), 2);
+                        categoryList.Add(r);
+                    }
+                }
+                else
+                {
+                    r.ID = combinedItemList[i - 1].ID;
+                    r.CategoryId = combinedItemList[i - 1].CategoryId;
+                    r.Quantity = avgCount;
+                    r.TotalRevenue = totalRevenue;
+                    r.AvgRevenue = Math.Round((totalRevenue / avgCount), 2);
+                    categoryList.Add(r);
+                    
+                    categoryIDCount++;
+                    categoryItemCount = 0;
+                    avgCount = 0;
+                    totalRevenue = 0;
+                    i--;
+                }
+            }
+
+            categoryList = categoryList.OrderByDescending(x => x.AvgRevenue).ToList(); // sort by highest avg revenue
+
+
+            var viewModel = new ReportViewModel
+            {
+                ReportList = categoryList,
+            };
+
+            return View("CategoryRevenueReport", viewModel);
         }
+
+        //[HttpPost]
+        //public ActionResult AddImage(Product model, HttpPostedFileBase image)
+        //{
+        //    model.Name = "ImageFill";
+        //    model.Price = 1;
+        //    model.Size = "test";
+        //    model.CategoryId = 1;
+        //    model.NumberInStock = 0;
+        //    model.Viewable = false;
+        //    model.ParentID = 0;
+
+        //    if (image != null)
+        //    {
+        //        model.ImageMimeType = image.ContentType;
+        //        model.ImageUploadBytes = new byte[image.ContentLength];
+        //        image.InputStream.Read(model.ImageUploadBytes, 0, image.ContentLength);
+        //    }
+        //    _context.Products.Add(model);
+        //    _context.SaveChanges();
+
+
+        //    return View(model);
+        //}
 
         [AllowAnonymous]
         public FileContentResult GetImage(int id)

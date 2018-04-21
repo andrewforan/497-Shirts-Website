@@ -8,6 +8,6 @@ namespace Website.ViewModels
 {
     public class ReportViewModel
     {
-        public List<Report> SizeReportList { get; set; }
+        public List<Report> ReportList { get; set; }
     }
 }
