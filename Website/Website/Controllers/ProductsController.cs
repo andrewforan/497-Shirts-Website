@@ -733,9 +733,11 @@ namespace Website.Controllers
                 for (int i = 0; i < combinedItemList.Count(); i++)
                 {
                     Report r = new Report();
+                    bool initial = true;
 
                     if (combinedItemList[i].CategoryId == categoryIDCount)
                     {
+                        initial = false;
                         avgCount += combinedItemList[i].Quantity;
                         totalRevenue += (combinedItemList[i].Price * combinedItemList[i].Quantity);
                         categoryItemCount++;
@@ -752,26 +754,29 @@ namespace Website.Controllers
                     }
                     else
                     {
-                        try
+                        if (initial == false)
                         {
-                            r.ID = combinedItemList[i - 1].ID;
-                            r.CategoryId = combinedItemList[i - 1].CategoryId;
-                        }
-                        catch
-                        {
-                            r.ID = combinedItemList[i].ID;
-                            r.CategoryId = combinedItemList[i].CategoryId;
-                        }
+                            try
+                            {
+                                r.ID = combinedItemList[i - 1].ID;
+                                r.CategoryId = combinedItemList[i - 1].CategoryId;
+                            }
+                            catch
+                            {
+                                r.ID = combinedItemList[i].ID;
+                                r.CategoryId = combinedItemList[i].CategoryId;
+                            }
 
-                        r.Quantity = avgCount;
-                        r.TotalRevenue = totalRevenue;
-                        r.AvgRevenue = Math.Round((totalRevenue / avgCount), 2);
-                        categoryList.Add(r);
+                            r.Quantity = avgCount;
+                            r.TotalRevenue = totalRevenue;
+                            r.AvgRevenue = Math.Round((totalRevenue / avgCount), 2);
+                            categoryList.Add(r);
 
+                            categoryItemCount = 0;
+                            avgCount = 0;
+                            totalRevenue = 0;
+                        }
                         categoryIDCount++;
-                        categoryItemCount = 0;
-                        avgCount = 0;
-                        totalRevenue = 0;
                         i--;
                     }
                 }
