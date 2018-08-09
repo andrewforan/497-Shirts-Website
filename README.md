@@ -1,6 +1,6 @@
 # 497-Shirts-Website
 
-One to two paragraph statement about your product and what it does.
+Final web project my for my Advanced Programming class. Users are able to add products to their carts and complete their purchase by checking out. Admins can add/edit/delete products and review generated reports from sales data. Built using the ASP.NET MVC framework. 
 
 ![](header.png)
 
