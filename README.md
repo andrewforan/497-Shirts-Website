@@ -1,4 +1,4 @@
-# MIS497-Site
+# 497-Shirts-Website
 
 One to two paragraph statement about your product and what it does.
 
