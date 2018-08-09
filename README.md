@@ -9,6 +9,6 @@ Final web project my for my Advanced Programming class. Users are able to add pr
 ![](header.png)
 
 ## Meta
-Andrew Foran – amforan@crimson.ua.edu
+Andrew Foran – [LinkedIn](https://www.linkedin.com/in/andrewmforan/) - amforan@crimson.ua.edu
 
 [https://github.com/andrewforan](https://github.com/andrewforan)
